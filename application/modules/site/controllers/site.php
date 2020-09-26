@@ -3722,6 +3722,7 @@ function loginteacher()
 
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
           }
+
           function ajaxfilterusersaveclass()
           {
             $result=['kq'=>false,'data'=>''];
@@ -4303,10 +4304,7 @@ function loginteacher()
           $created_date = strtotime($info->CreateDate);
           // var_dump($_FILES['imageuser']);die();
           if($_FILES['imageuser'] != null){
-           //  if(!is_dir('upload/users')){
-           //   mkdir('upload/users/'.date("Y",time())."/".date("m",time())."/".date("d",time()), 0755, TRUE);
-           //   mkdir('upload/users/thumb/'.date("Y",time())."/".date("m",time())."/".date("d",time()), 0755, TRUE);
-           // }
+
             if(!is_dir('upload/users/'.date("Y",$created_date).'/'.date("m",$created_date).'/'.date("d",$created_date)))
             {
              mkdir('upload/users/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), 0755, TRUE);
@@ -4314,7 +4312,6 @@ function loginteacher()
            }           
            $filename = $_FILES['imageuser']['name'];
            $filedata = $_FILES['imageuser']['tmp_name'];
-           $temp=explode('.',$filename);			
            $imageThumb = new Image($filedata);
            $thumb_path = "avatar".date("YmdHis",$created_date).rand(10000,99999);
            $imageThumb->save($thumb_path, 'upload/users/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);

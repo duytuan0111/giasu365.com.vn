@@ -124,6 +124,7 @@
 <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
 <script src="js/localDatetime.js"></script>
 <script>
+  
 $(document).ready(function(){
      var configulr='<?php echo site_url(); ?>';
      $('#monhoc').select2({ width: '100%',placeholder: 'Chọn môn học' });
@@ -132,14 +133,21 @@ $(document).ready(function(){
         format: 'DD-MM-YYYY'
     });
     $('#loctimkiem').on('click',function(){
+      var monhoc    = $('#monhoc').val();
+      var findkey   = $('#findkey').val();
+      var ngaythang = $('#txtngaysinh').val();
+      if (monhoc.length == 0) {
+          window.alert('Vui lòng chọn môn học');
+      }
         $.ajax({
                           
                           url: configulr+"site/ajaxfilterusersaveclass",
                           type: "POST",
+                          async: false,
                           data: { 
-                            monhoc: $('#monhoc').val(),
-                            findkey:$('#findkey').val(),
-                            ngaythang:$('#txtngaysinh').val()
+                            monhoc: monhoc,
+                            findkey:findkey,
+                            ngaythang:ngaythang
                           },
                           dataType: 'json',
                           beforeSend: function () {
@@ -151,24 +159,23 @@ $(document).ready(function(){
                                 $('#tbllstclass tbody tr').remove();
                                 $('#tbllstclass tbody').append(obj.data);
                                 }else{                                    
-                                                                    
+                                    window.alert('Không tìm thấy kết quả lọc');                                
                                 }
                           },
                           error: function (xhr) {
-                              alert("error");
+                              alert("Lọc không thành công");
                           },
                           complete: function () {                              
-                              
                               
                           }
                       }); 
     });
-    $('.btnntdedit').on('click',function(){
+    $('body').on('click','.btnntdedit',function(){
             $('#txtghichu').val('');
             $('#txtclassid').val($(this).attr('data-val'));
             $('#myModal').modal('show');
         });
-    $('.btnntddelete').on('click',function(){            
+    $('body').on('click','btnntddelete',function(){            
                 $.ajax({
                           
                           url: configulr+"site/ajaxdeleteuserssaveclass",

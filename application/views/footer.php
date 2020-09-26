@@ -91,6 +91,7 @@ $urlweb= current_url();
 		});
 		$(document).ready(function(){
 			var configulr = '<?php echo site_url(); ?>';
+			var usertype= 1;
 			$('#btn-top').click(function() {
 				$('body,html').animate({
 					scrollTop: 0
@@ -154,10 +155,12 @@ $urlweb= current_url();
 				//In slug ra textbox có id “slug”
 				return slug;
 			}
+			$(document).on('click', '#tab2', function(event) {
+				usertype = 0;
+			});
 			$('.timvieclam').on('click',function(){
 				
 				var findkey=$('#findkeyjob').val();
-                var usertype=$('#index_user_type').val();
                 var nganhnghe=$('#index_nganhnghe').val();
                 var diadiem=$('#index_dia_diem').val();
                 var lop = $('#index_lop').val();

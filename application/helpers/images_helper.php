@@ -154,7 +154,6 @@ class Image {
         $newImage_height = $max_height;
         $srcX = 0;
         $srcY = 0;
-
         //Get ratio of max_width : max_height
         $ratioOfMaxSizes = $max_width / $max_height;
 
