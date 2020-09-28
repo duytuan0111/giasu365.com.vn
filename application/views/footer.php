@@ -102,6 +102,10 @@ $urlweb= current_url();
 			$('#index_dia_diem').select2({ width: 'calc(100%)' });
 			$('#index_lop').select2({ width: 'calc(100%)' });
 			$('#index_quanhuyen').select2({ width: 'calc(100%)' });
+			$('#index_nganhnghe1').select2({ width: 'calc(100%)' });
+			$('#index_dia_diem1').select2({ width: 'calc(100%)' });
+			$('#index_lop1').select2({ width: 'calc(100%)' });
+			$('#index_quanhuyen1').select2({ width: 'calc(100%)' });
 			$('#candinganhnghe').select2({ width: 'calc(100%)' });
 			$('#candilocation').select2({ width: 'calc(100%)' });
 			$('#index_user_type').select2({width: 'calc(100%)' });
@@ -157,16 +161,16 @@ $urlweb= current_url();
 			}
 			$(document).on('click', '#tab2', function(event) {
 				usertype = 0;
+				console.log(usertype);
 			});
 			$('.timvieclam').on('click',function(){
 				
-				var findkey=$('#findkeyjob').val();
-                var nganhnghe=$('#index_nganhnghe').val();
-                var diadiem=$('#index_dia_diem').val();
-                var lop = $('#index_lop').val();
-                var quanhuyen = $('#index_quanhuyen').val();
                 var configulr = '<?php echo site_url(); ?>';
-            
+            	var findkey=$('#findkeyjob').val();
+				var nganhnghe=$('#index_nganhnghe').val();
+				var diadiem=$('#index_dia_diem').val();
+				var lop = $('#index_lop').val();
+				var quanhuyen = $('#index_quanhuyen').val();
 				if(usertype == 0)
 				{
 					if(findkey !='' || nganhnghe !=0 || diadiem!=0 || lop!=0)

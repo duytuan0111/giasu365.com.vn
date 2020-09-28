@@ -274,7 +274,7 @@ $detect = new Mobile_Detect;
                     <div class="col-md-4 no-padd">
                         <div class="col-md-12 no-padd findkeyjob">
                             <div class="input-group">
-                                <input type="text" value="<?php echo ($keyfilter['keywork']!='0')?$keyfilter['keywork']:'' ?>" id="findkeyjob" class="form-control right-bor" placeholder="Tìm kiếm lớp gia sư" aria-label="nhập từ khóa">
+                                <input type="text" value="<?php echo ($keyfilter['keywork']!='0')?$keyfilter['keywork']:'' ?>" id="findkeyjob1" class="form-control right-bor" placeholder="Tìm kiếm lớp gia sư" aria-label="nhập từ khóa">
                             </div>
                         </div>
                         <div class="no-padd user_type hidden-mobile">
@@ -306,7 +306,7 @@ $detect = new Mobile_Detect;
                                 <div class="input-group">
                                     
                                     <span class="span-before"><i class="nn"></i></span>
-                                    <select id="index_nganhnghe" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?> >
+                                    <select id="index_nganhnghe1" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?> >
                                         <option  value="0">Môn học</option> 
                                         <?php
                                         
@@ -329,7 +329,7 @@ $detect = new Mobile_Detect;
                             <div class="col-md-6 no-padd lop">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn"></i></span>
-                                    <select id="index_lop" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                    <select id="index_lop1" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
                                         <option  value="0">Chọn lớp</option> 
                                         <?php 
                                         if(!empty($lop)){
@@ -351,7 +351,7 @@ $detect = new Mobile_Detect;
                             <div class="col-md-6 no-padd diadiem">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
-                                    <select id="index_dia_diem" class="form-control" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                    <select id="index_dia_diem1" class="form-control" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
                                         <option data-tokens="0" value="0">Tỉnh thành</option>
                                         <?php 
                                         if(!empty($tinhthanh)){
@@ -371,7 +371,7 @@ $detect = new Mobile_Detect;
                             <div class="col-md-6 no-padd quanhuyen">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
-                                    <select id="index_quanhuyen" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                    <select id="index_quanhuyen1" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
                                         <option  value="0">Quận/Huyện</option> 
                                         <?php 
                                         if(!empty($keyfilter['place'])){
@@ -538,7 +538,276 @@ $detect = new Mobile_Detect;
 <?php if($showsearch && $detect->isMobile()){ ?>
     <div class="container searchmobile" style="background-color: #203043;border-top: 1px solid #fff;">
         <div class="banner-caption hidden-mobile">
-            <div class="banner-text">
+             <!-- Thêm tab html -->
+            <div class="col-xs-12 no-padd">
+            <ul class="nav nav-tabs col-xs-12"  id="example-tabs" role="tablist">
+                <li class="nav-item active">
+                    <a id="tab1" class="nav-link" style="border-left:none" data-toggle="tab" role="tab"  href="#pane-tab-1">Tìm gia sư</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tab2" class="nav-link" data-toggle="tab" role="tab"  href="#pane-tab-2">Tìm lớp gia sư</a>
+                </li>
+            </ul>
+            </div>
+            <!-- Nội dung tab -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="pane-tab-1" role="tabpanel" aria-labelledby="tab1">
+                    <div class="banner-text">
+                <form onsubmit="return false" class="form-horizontal">
+                    <div class="col-xs-12 no-padd">
+                        <div class="col-xs-12 no-padd findkeyjob">
+                            <div class="input-group">
+                                <input type="text" value="<?php echo $keyfilter['keywork'] ?>" id="findkeyjob" class="form-control right-bor" aria-label="nhập từ khóa" placeholder="Tìm kiếm gia sư" >
+                            </div>
+                        </div>
+                        <div class="no-padd user_type hidden-mobile">
+                            <div class="input-group">
+                                <select id="index_user_type" class="form-control right-bor">
+                                    <?
+                                    if($type == 1 || $link == base_url()."tim-lop-hoc")
+                                    {
+                                        ?>
+                                        <option data-tokens="0" value="0">Tìm lớp gia sư</option>
+                                        <?       
+                                    }
+                                    else if($type ==0 || $type == 3)
+                                    {
+                                        ?>
+                                        <option data-tokens="1" value="1">Tìm gia sư</option>
+                                        <?
+                                    }
+
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="no-padd">
+                        <div class="col-xs-12 no-padd">
+                            <div class="col-xs-12 no-padd nganhnghe">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn"></i></span>
+                                    <select id="index_nganhnghe" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?> >
+                                        <option  value="0">Môn học</option> 
+                                        <?php
+                                        if(!empty($monhoc)){
+                                            foreach($monhoc as $n){
+                                                if($n->ID == $keyfilter['subject']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->ID ?>"><?php echo $n->SubjectName ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->ID ?>"><?php echo $n->SubjectName ?></option>
+                                                <?php } 
+                                            }
+                                        } 
+                                        ?>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-padd lop">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn"></i></span>
+                                    <select id="index_lop" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                        <option  value="0">Chọn lớp</option> 
+                                        <?php 
+                                        if(!empty($lop)){
+                                            foreach($lop as $n){
+                                                if($n->id == $keyfilter['class']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->id ?>"><?php echo $n->classname ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->id ?>"><?php echo $n->classname ?></option>
+                                                <?php }
+                                            }
+                                        }
+                                        ?>       
+                                    </select>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="col-xs-12 no-padd">
+                            <div class="col-xs-12 no-padd diadiem">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn2"></i></span>
+                                    <select id="index_dia_diem" class="form-control" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                        <option data-tokens="0" value="0">Tỉnh thành</option>
+                                        <?php 
+                                        if(!empty($tinhthanh)){
+                                            foreach($tinhthanh as $n){
+                                                if($n->cit_id == $keyfilter['place']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }
+                                            }
+                                        }
+                                        ?>     
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-padd quanhuyen">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn2"></i></span>
+                                    <select id="index_quanhuyen" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                        <option  value="0">Quận/Huyện</option> 
+                                        <?php 
+                                        if(!empty($keyfilter['place'])){
+                                            foreach($quanhuyen as $n){
+                                                if($n->cit_id == $keyfilter['district']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }
+                                            }
+                                        }
+                                        ?>  
+                                    </select>
+                                </div>
+                            </div>  
+                        </div>                               
+                        <div class="col-xs-12 no-padd btnsearch">
+                            <div class="input-group">
+                                <button class="btn btn-primary timvieclam" aria-label="more" role="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+                </div>
+                <div class="tab-pane fade" id="pane-tab-2" role="tabpanel" aria-labelledby="tab2">
+                    <div class="banner-text">
+                        <div class="banner-text">
+                <form onsubmit="return false" class="form-horizontal">
+                    <div class="col-xs-12 no-padd">
+                        <div class="col-xs-12 no-padd findkeyjob">
+                            <div class="input-group">
+                                <input type="text" value="<?php echo $keyfilter['keywork'] ?>" id="findkeyjob1" class="form-control right-bor" aria-label="nhập từ khóa" placeholder="Tìm kiếm lớp gia sư" >
+                            </div>
+                        </div>
+                        <div class="no-padd user_type hidden-mobile">
+                            <div class="input-group">
+                                <select id="index_user_type" class="form-control right-bor">
+                                    <?
+                                    if($type == 1 || $link == base_url()."tim-lop-hoc")
+                                    {
+                                        ?>
+                                        <option data-tokens="0" value="0">Tìm lớp gia sư</option>
+                                        <?       
+                                    }
+                                    else if($type ==0 || $type == 3)
+                                    {
+                                        ?>
+                                        <option data-tokens="1" value="1">Tìm gia sư</option>
+                                        <?
+                                    }
+
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="no-padd">
+                        <div class="col-xs-12 no-padd">
+                            <div class="col-xs-12 no-padd nganhnghe">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn"></i></span>
+                                    <select id="index_nganhnghe1" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?> >
+                                        <option  value="0">Môn học</option> 
+                                        <?php
+                                        if(!empty($monhoc)){
+                                            foreach($monhoc as $n){
+                                                if($n->ID == $keyfilter['subject']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->ID ?>"><?php echo $n->SubjectName ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->ID ?>"><?php echo $n->SubjectName ?></option>
+                                                <?php } 
+                                            }
+                                        } 
+                                        ?>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-padd lop">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn"></i></span>
+                                    <select id="index_lop1" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                        <option  value="0">Chọn lớp</option> 
+                                        <?php 
+                                        if(!empty($lop)){
+                                            foreach($lop as $n){
+                                                if($n->id == $keyfilter['class']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->id ?>"><?php echo $n->classname ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->id ?>"><?php echo $n->classname ?></option>
+                                                <?php }
+                                            }
+                                        }
+                                        ?>       
+                                    </select>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="col-xs-12 no-padd">
+                            <div class="col-xs-12 no-padd diadiem">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn2"></i></span>
+                                    <select id="index_dia_diem1" class="form-control" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                        <option data-tokens="0" value="0">Tỉnh thành</option>
+                                        <?php 
+                                        if(!empty($tinhthanh)){
+                                            foreach($tinhthanh as $n){
+                                                if($n->cit_id == $keyfilter['place']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }
+                                            }
+                                        }
+                                        ?>     
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-padd quanhuyen">
+                                <div class="input-group">
+                                    <span class="span-before"><i class="nn2"></i></span>
+                                    <select id="index_quanhuyen1" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
+                                        <option  value="0">Quận/Huyện</option> 
+                                        <?php 
+                                        if(!empty($keyfilter['place'])){
+                                            foreach($quanhuyen as $n){
+                                                if($n->cit_id == $keyfilter['district']){
+                                                    ?>
+                                                    <option selected="selected" value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?php echo $n->cit_id ?>"><?php echo $n->cit_name ?></option>
+                                                <?php }
+                                            }
+                                        }
+                                        ?>  
+                                    </select>
+                                </div>
+                            </div>  
+                        </div>                               
+                        <div class="col-xs-12 no-padd btnsearch">
+                            <div class="input-group">
+                                <button class="btn btn-primary timvieclam" aria-label="more" role="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+                    </div>
+                </div>
+
+        </div>
+            <!-- <div class="banner-text">
                 <form onsubmit="return false" class="form-horizontal">
                     <div class="col-xs-12 no-padd">
                         <div class="col-xs-12 no-padd findkeyjob">
@@ -656,12 +925,12 @@ $detect = new Mobile_Detect;
                         </div>                               
                         <div class="col-xs-12 no-padd btnsearch">
                             <div class="input-group">
-                                <button class="btn btn-primary timvieclam1" aria-label="more" role="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-primary timvieclam" aria-label="more" role="button"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>    
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 <?php } ?>
