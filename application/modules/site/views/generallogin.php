@@ -39,7 +39,7 @@ if(!empty($_SESSION['UserInfo'])){
                 </div>
                  <ul>
                 <li>Được tiếp cận với hàng ngàn học viên</li>
-                <li>Chủ động lựa chọn lớp và mức giá phù hợp</li>
+                <li>Chủ động lựa chọn lớp với mức giá phù hợp</li>
                 <li>Có cơ hội được truyền đạt kiến thức của mình
                 </li>
             </ul>

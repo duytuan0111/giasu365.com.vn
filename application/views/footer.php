@@ -161,18 +161,20 @@ $urlweb= current_url();
 			}
 			$(document).on('click', '#tab2', function(event) {
 				usertype = 0;
-				console.log(usertype);
+			});
+			$(document).on('click', '#tab1', function(event) {
+				usertype = 1;
 			});
 			$('.timvieclam').on('click',function(){
 				
                 var configulr = '<?php echo site_url(); ?>';
-            	var findkey=$('#findkeyjob').val();
-				var nganhnghe=$('#index_nganhnghe').val();
-				var diadiem=$('#index_dia_diem').val();
-				var lop = $('#index_lop').val();
-				var quanhuyen = $('#index_quanhuyen').val();
 				if(usertype == 0)
 				{
+					var findkey=$('#findkeyjob1').val();
+					var nganhnghe=$('#index_nganhnghe1').val();
+					var diadiem=$('#index_dia_diem1').val();
+					var lop = $('#index_lop1').val();
+					var quanhuyen = $('#index_quanhuyen1').val();
 					if(findkey !='' || nganhnghe !=0 || diadiem!=0 || lop!=0)
 					{
 						$.ajax({
@@ -213,6 +215,11 @@ $urlweb= current_url();
 				}
 				else if(usertype == 1)
 				{
+					var findkey=$('#findkeyjob').val();
+					var nganhnghe=$('#index_nganhnghe').val();
+					var diadiem=$('#index_dia_diem').val();
+					var lop = $('#index_lop').val();
+					var quanhuyen = $('#index_quanhuyen').val();
 					if(findkey !='' || nganhnghe !=0 || diadiem!=0 || lop!=0)
 					{
 						$.ajax({                  

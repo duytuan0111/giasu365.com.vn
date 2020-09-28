@@ -697,7 +697,7 @@ class site extends Controller
     $data['home'] = false;
     $data['meta_title']="Đăng nhập chung";
     $data['meta_key']="Đăng nhập gia sư";
-    $data['meta_des']="Đăng nhập gia sư";        
+    $data['meta_des']="Đăng nhập gia sư";       
         //$data['congtymoinhat']=$this->site_model->GetTopCompany(10);
         //$data['ungviennoibat']=$this->site_model->GetListCandidate("1=1 ",5,'order by u.use_update_time desc');		
     $data['canonical']=base_url();	
@@ -4247,6 +4247,7 @@ function loginteacher()
     }
     function ajaxteacherupdateinfo()
     {
+      define('MB', 1048576);
       $result=['kq'=>false,'data'=>'','file'=>''];
       $chieu2=$_POST['chieu2'];
       $chieu3=$_POST['chieu3'];
@@ -4260,8 +4261,6 @@ function loginteacher()
       $chuyennganh=$_POST['chuyennganh'];//: "lớp 1"
       $emailuser=$_POST['emailuser'];//: "trantronglong87@gmail.com"
       $gioithieubanthan=$_POST['gioithieubanthan'];//: "giới thiệu bản thân"
-      // var_dump($gioithieubanthan);
-      // die();//: "on"
       $gioitinh=$_POST['gioitinh'];//: "on"
       $hientaila=$_POST['hientaila'];//: "undefined"
       $hinhthucday=$_POST['hinhthucday'];//: "on"
@@ -4312,12 +4311,19 @@ function loginteacher()
            }           
            $filename = $_FILES['imageuser']['name'];
            $filedata = $_FILES['imageuser']['tmp_name'];
-           $imageThumb = new Image($filedata);
-           $thumb_path = "avatar".date("YmdHis",$created_date).rand(10000,99999);
-           $imageThumb->save($thumb_path, 'upload/users/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
-         $imageThumb->resize(300,300,'crop');
-         $imageThumb->save($thumb_path, 'upload/users/thumb/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
-           $imguser=$thumb_path.".".$temp[1];
+           if ($_FILES['imageuser']['size'] < 2*MB) {
+            $temp=explode('.',$filename);
+            $imageThumb = new Image($filedata);
+            $thumb_path = "avatar".date("YmdHis",$created_date).rand(10000,99999);
+            $imageThumb->save($thumb_path, 'upload/users/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
+            $imageThumb->resize(300,300,'crop');
+            $imageThumb->save($thumb_path, 'upload/users/thumb/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
+            $imguser=$thumb_path.".".$temp[1];
+            $result['isimagesizeavt'] = true;
+           }
+           else {
+            $result['isimagesizeavt'] = false;
+           }
            
          }
          else {
@@ -4340,14 +4346,20 @@ function loginteacher()
           if($_FILES['cmnduser'] != null){
             $filename = $_FILES['cmnduser']['name'];
             $filedata = $_FILES['cmnduser']['tmp_name'];
-            $temp=explode('.',$filename);			
-            $imageThumb = new Image($filedata);
-            $thumb_path = "cmnd".date("YmdHis",$created_date).rand(10000,99999);
-            $imageThumb->save($thumb_path, 'upload/users/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
+            if ($_FILES[['cmnduser']['size']] < 2*MB) {
+             $temp=explode('.',$filename);      
+             $imageThumb = new Image($filedata);
+             $thumb_path = "cmnd".date("YmdHis",$created_date).rand(10000,99999);
+             $imageThumb->save($thumb_path, 'upload/users/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
 
-            $imageThumb->resize(300,300,'crop');
-            $imageThumb->save($thumb_path, 'upload/users/thumb/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
-            $imgcmnd=$thumb_path.".".$temp[1];  
+             $imageThumb->resize(300,300,'crop');
+             $imageThumb->save($thumb_path, 'upload/users/thumb/'.date("Y",$created_date)."/".date("m",$created_date)."/".date("d",$created_date), $temp[1]);
+             $imgcmnd=$thumb_path.".".$temp[1]; 
+             $result['isimagecmnd'] = true;
+            }
+            else {
+             $result['isimagecmnd'] = false;
+            } 
           }  
           else {
             $imgcmnd="";
@@ -4371,10 +4383,10 @@ function loginteacher()
               }
             }
             $ip = time();
-            //$result=json_decode($result,true);
-            //var_dump($result->UserId);die();
-
-            $result=['kq'=>true,'data'=>$hoten,'file'=>'','msg'=>'Cập nhật thành công'];
+            $result['kq']   = true;
+            $result['data'] = $hoten;
+            $result['msg']  = 'Cập nhật thành công'; 
+            // $result=['kq'=>true,'data'=>$hoten,'file'=>'','msg'=>'Cập nhật thành công'];
           }
         }
       }
@@ -4487,7 +4499,7 @@ function loginteacher()
   if(!empty($_SESSION['UserInfo'])){
     $tg=$_SESSION['UserInfo'];
     $userid=$tg['UserId'];            
-    $kg=$this->site_model->refreshclass($userid);	
+    $kg=$this->site_model->refreshclass($userid);
     if($kg['kq'] == true){
       $result=['kq'=>true,'data'=>'Cập nhật tài khoản thành công'];
     }

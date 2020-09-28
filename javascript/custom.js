@@ -641,7 +641,6 @@ function UserManager() {
   })
   $('#btnlogout').on('click', function() {
     $.ajax({
-
       url: configulr + "/site/logout",
       type: "POST",
       data: {},

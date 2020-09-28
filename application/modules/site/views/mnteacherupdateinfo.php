@@ -696,14 +696,22 @@ $('#datetimepicker1').datetimepicker({
                       $("#boxLoading").show();
                   },
                   success: function (reponse) {
-                      if (reponse.kq == true) {
+                    console.log(reponse);
+                    if (reponse.kq == true) {
+                        console.log(reponse);
+                        console.log(typeof(reponse.isimagecmnd));
+                        if ((typeof(reponse.isimagesizeavt !== 'undefined') && (reponse.isimagesizeavt == false)) || (typeof(reponse.isimagecmnd !== 'undefined') && (reponse.isimagecmnd == false))) {
+                            alert('Dung lượng ảnh không vượt quá 2MB');
+                        }
+                        else {
                             alert('Cập nhật thành công');
                             window.location.reload();
-                            
-                      }
-                      else {
-                         alert('Cập nhật thất bại');
-                      }
+                        }
+
+                    }
+                    else {
+                       alert('Cập nhật thất bại');
+                   }
                   },
                   error: function (xhr) {
                       alert("error");

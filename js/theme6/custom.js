@@ -10,7 +10,7 @@ All custom js files contents are below
 * 05. Add field Script
 **************************************/
 // var configulr='https://timviec365.com.vn/gia-su/';
-var configulr = 'http://localhost:8099/';
+var configulr = 'http://localhost:8181/';
 (function($){
 "use strict";
 var um=new UserManager();

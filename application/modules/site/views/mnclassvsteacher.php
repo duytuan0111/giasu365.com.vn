@@ -49,6 +49,9 @@
                             
                         </tbody>
                     </table>
+                    <?php if (empty($uservsclass)) {
+                      echo "<p class='text-center'>Không tìm thấy bản ghi.</p>";
+                    } ?>
                 </div>
                 </div>
             </div>

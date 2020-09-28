@@ -86,16 +86,15 @@ foreach ($point as $key ) {
                 }
             }
             ?>
-<div class="row">
+    <div class="row">
             <div class="left-menu">
             <div class="logonuv">
-              
             <?php if(empty($uinfo->Image)) {
                     $tg=explode('-',date('d-m-Y',strtotime($uinfo->CreateDate)));?>
                     
-                <img src="images/no-image2.png" alt="" class="img-t-01">
+                <img src="<?php echo base_url(); ?>images/no-image2.png" alt="" class="img-t-01">
                 <?php } else {?>
-                <img src="/upload/images/<?php echo $uinfo->Image ?>" class="img-t-01" />
+                <img src="<?php echo base_url(); ?>upload/images/<?php echo $uinfo->Image ?>" class="img-t-01" />
                 <?php } ?>
               <a><?php echo $userlogin; ?></a>
             </div>

@@ -66,7 +66,7 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
             <div class="logonuv">
                 <span class="imglogo">
                 <?php if(empty($info->Image)) { ?>
-                <img src="images/no-image2.png" alt="" class="img-t-01">
+                <img src="<?php echo base_url(); ?>images/no-image2.png" alt="" class="img-t-01">
                 <?php } else { $tg=explode('-',date('d-m-Y',strtotime($info->CreateDate))); ?>
                 <img src="<?php echo base_url(); ?>upload/users/thumb/<?php echo $tg[2]."/".$tg[1]."/".$tg[0]."/".$info->Image  ?>" class="img-t-01" />
                 <?php } ?>

@@ -85,6 +85,9 @@
                             <?php } } ?>                            
                         </tbody>
                     </table>
+                    <?php if (empty($uservsclass)) {
+                      echo "<p class='text-center'>Không tìm thấy bản ghi.</p>";
+                    } ?>
                 </div>
                 </div>
             </div>
@@ -175,7 +178,7 @@ $(document).ready(function(){
             $('#txtclassid').val($(this).attr('data-val'));
             $('#myModal').modal('show');
         });
-    $('body').on('click','btnntddelete',function(){            
+    $('body').on('click','.btnntddelete',function(){            
                 $.ajax({
                           
                           url: configulr+"site/ajaxdeleteuserssaveclass",

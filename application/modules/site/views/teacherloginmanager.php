@@ -42,6 +42,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        
                             <?php if($topclasssave != ''){ 
                                 $j=0;
                                 foreach($topclasssave as $i){
@@ -59,6 +60,9 @@
                             
                         </tbody>
                     </table>
+                    <?php if (empty($topclasssave)) {
+                        echo "<p class='text-center'>Không tìm thấy bản ghi.</p>";
+                    } ?>
                 </div>
                 <div class="box-file-newest">
                     <div class="title"><i class="fa fa-listservices"></i>Danh sách dịch vụ
@@ -76,7 +80,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>Gói điểm xem hồ sơ</td>
                                 <td>01/11/2020</td>
@@ -99,9 +103,10 @@
                                 <td>Gói điểm xem hồ sơ</td>
                                 <td>01/11/2020</td>
                                 <td>01/11/2020</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
+                    <p class='text-center'>Không tìm thấy bản ghi.</p>
                 </div>
             </div>
         </div>
