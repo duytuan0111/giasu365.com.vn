@@ -65,7 +65,6 @@ foreach ($laytieude as $key => $value) {
 <section class="inner-header-title detailcom">
 	<div class="container">
 		<h1><?php echo $item->title; ?></h1>
-        
 	</div>
 </section>
 <div class="clearfix"></div>

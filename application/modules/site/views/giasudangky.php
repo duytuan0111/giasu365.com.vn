@@ -621,7 +621,7 @@
 
                 data = new FormData();
                 data.append('hoten',$('#txthoten').val());
-                data.append('username',$('#txtphone').val());
+                data.append('sdt',$('#txtphone').val());
                 data.append('password',$('#txtmatkhau').val());
                 data.append('emailuser', $('#txtemail').val());
                 data.append('ngaysinh', $('#txtngaysinh').val());

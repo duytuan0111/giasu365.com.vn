@@ -1018,7 +1018,7 @@ class site extends Controller
     $place=$_POST['place'];
     $type=$_POST['type'];
     $sex=$_POST['sex'];
-
+    
       $class = 0;
       $district= 0;
       if(strlen($key)>0){
@@ -1028,6 +1028,7 @@ class site extends Controller
       {
         $key='0';
       }
+
       if(intval($subject)>0)
       {
         $subject = $subject;
@@ -1039,6 +1040,7 @@ class site extends Controller
         $subject = 0;
         $monhoc = '';
       }
+
       if(intval($place)>0)
       {
         $place = $place;
@@ -1056,6 +1058,7 @@ class site extends Controller
         $tinhthanh = '';
         $quanhuyen='';
       }
+
       if(intval($class)>0)
       {
         $class = $class;
@@ -1080,8 +1083,8 @@ class site extends Controller
         $sex = 0;
       }
 
-     
-
+    // var_dump($key, $subject, $class, $place, $type, $sex);
+    // die();
     if(!empty(CheckSubject($subject)) && intval($class)==0 && intval($place)==0 && strlen($key)>0 && intval($type)==0 && intval($sex)==0)
     {
       $link=base_url().'viec-lam-gia-su-mon-'.$monhoc.'-s'.intval($subject).'c0p0.html';
@@ -4139,6 +4142,7 @@ function loginteacher()
         $toi7=$_POST['toi7'];//: "1"
         $toi8=$_POST['toi8'];//: "1"
         $phone=$_POST['sdt'];//: "0912308"
+
         $descusers=$gioithieubanthan;
         // $lop = $_POST['lop']; 
         // $classname = $this->site_model->GetClassByID($lop)->classname;
@@ -4429,14 +4433,14 @@ function loginteacher()
         $config['max_filename'] = '255';
         // $config['encrypt_name'] = TRUE;
         $config['overwrite'] = 'FALSE ';
-        $config['max_size'] = '1024'; //1 MB
+        $config['max_size'] = '2048'; //2 MB
 
         if (isset($_FILES['file']['name'])) {
             if (0 < $_FILES['file']['error']) {
                 echo 'Error during file upload' . $_FILES['file']['error'];
             } 
-            else if($config['max_size']>1024){
-              echo 'Kích thước file không được lớn hơn 1024MB' . $_FILES['file']['error'];
+            else if($config['max_size']>2048){
+              echo 'Kích thước file không được lớn hơn 2MB' . $_FILES['file']['error'];
             }
             else {
                 if (file_exists('uploads/' . $_FILES['file']['name'])) {
@@ -4472,9 +4476,14 @@ function loginteacher()
   function ajaxviewcontactinfo()
   {
     $result=['kq'=>false,'data'=>""];
-        //var_dump($result);die();
     $keyview=$this->input->post('keyview');
-    if(!empty($_SESSION['UserInfo'])){
+    $Userid = $_SESSION['UserInfo']['UserId'];
+    $userlogin = $kq=$this->site_model->GetUserInfoByUserID($Userid); 
+    $UserType = $userlogin->UserType;
+    if ($UserType == 1 || is_null($UserType)) {
+      $result=['kq'=>false,'data'=>'dữ liệu truyền không đúng'];
+    }
+    else {
       $tgkey=explode('_',$keyview);
       if(strtolower($tgkey[0]==='users')|| strtolower($tgkey[0]==='class')){
         $tg=$_SESSION['UserInfo'];
@@ -4482,15 +4491,31 @@ function loginteacher()
         $kq=$this->site_model->GetUserInfoByUserID($userid);  
         $configpoint=$this->site_model->getpointconfig();          
 
-        $kg=$this->site_model->addlogpoint($userid,2,(0 - $configpoint->PointSub),1,$keyview);	
+        $kg=$this->site_model->addlogpoint($userid,2,(0 - $configpoint->PointSub),1,$keyview);  
         if($kg['kq'] == true){
           $result=['kq'=>true,'data'=>'Xem thông tin thành công'];
         }
       }else{
        $result=['kq'=>false,'data'=>'dữ liệu truyền không đúng'];
      }
+    }
+   //  if(!empty($_SESSION['UserInfo'])){
+   //    $tgkey=explode('_',$keyview);
+   //    if(strtolower($tgkey[0]==='users')|| strtolower($tgkey[0]==='class')){
+   //      $tg=$_SESSION['UserInfo'];
+   //      $userid=$tg['UserId'];
+   //      $kq=$this->site_model->GetUserInfoByUserID($userid);  
+   //      $configpoint=$this->site_model->getpointconfig();          
 
-   }
+   //      $kg=$this->site_model->addlogpoint($userid,2,(0 - $configpoint->PointSub),1,$keyview);	
+   //      if($kg['kq'] == true){
+   //        $result=['kq'=>true,'data'=>'Xem thông tin thành công'];
+   //      }
+   //    }else{
+   //     $result=['kq'=>false,'data'=>'dữ liệu truyền không đúng'];
+   //   }
+
+   // }
    echo json_encode($result,JSON_UNESCAPED_UNICODE);
  }
  function ajaxrefreshusers()
@@ -4498,7 +4523,7 @@ function loginteacher()
   $result=['kq'=>false,'data'=>""];
   if(!empty($_SESSION['UserInfo'])){
     $tg=$_SESSION['UserInfo'];
-    $userid=$tg['UserId'];            
+    $userid=$tg['UserId']; 
     $kg=$this->site_model->refreshclass($userid);
     if($kg['kq'] == true){
       $result=['kq'=>true,'data'=>'Cập nhật tài khoản thành công'];
@@ -4684,7 +4709,7 @@ function listclassbyfilter($alias1, $subject,$class,$city)
     $data['metah1']='SO SÁNH LƯƠNG CỦA BẠN TRƯỚC KHI NHẢY VIỆC!';
   }
   $data['topkey'] = $this->site_model->ListTopKeywork();
-  $topic=0;$type=1;$sex=0;
+  $topic=0;$type=0;$sex=0; // $type = 1
   $key='';
   $keywork = '';
   $perpage=20;
@@ -4815,7 +4840,7 @@ function listclassbyfilter_clone($alias1, $alias2, $subject, $class, $city)
   }else{
     $data['metah1']='SO SÁNH LƯƠNG CỦA BẠN TRƯỚC KHI NHẢY VIỆC!';
   }
-  $topic=0;$type=1;$sex=0;
+  $topic=0;$type=0;$sex=0; // $type =1
   $key='';
   $keywork = '';
   $perpage=20;
@@ -4930,7 +4955,7 @@ function listclassbyfilter_TPHCM($alias1, $alias2, $city, $district)
   }else{
     $data['metah1']='SO SÁNH LƯƠNG CỦA BẠN TRƯỚC KHI NHẢY VIỆC!';
   }
-  $topic=0;$type=1;$sex=0;
+  $topic=0;$type=0;$sex=0; // $type =1
   $key='';
   $keywork = '';
   $perpage=20;

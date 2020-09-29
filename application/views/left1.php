@@ -290,32 +290,28 @@ foreach ($point as $key ) {
         /*alert($('.uvactiventd input[name="uvduyetsearch"]:checked').val());*/
     });
     });
-   $('.btnrefreshuv').on('click',function(){
-    $.ajax(
-              {                  
-                  url: configulr+"site/ajaxrefreshusers",
-                  type: "POST",
-                  data: { },
-                  dataType: 'json',
-                  beforeSend: function () {
-                      $("#boxLoading").show();
-                  },
-                  success: function (reponse) {
-                      if (reponse.kq == true) {
-                          alert('Cập nhật thành công');
-                      }else{
-                        alert('Cập nhật thất bại');
-                      }
-                      
-                  },
-                  error: function (xhr) {
-                      alert("error");
-                  },
-                  complete: function () {
-                      $("#boxLoading").hide();
-                      window.location.reload();
-                  }
-              }); 
+   $('.btnrefreshuv').on('click',function(){ 
+    $.ajax({
+      url: configulr+ 'site/ajaxrefreshusers',
+      type: 'POST',
+      dataType: 'json',
+      beforeSend: function() {
+        $('#boxloading').show();
+      },
+      success: function(reponse) {
+        if (reponse.kq == true) {
+          console.log(reponse);
+          alert('Cập nhật thành công');
+          window.location.reload();
+        }
+        else {
+          alert('Cập nhật thất bại');
+        }
+      },
+      error: function() {
+        alert('error');
+      }
+    })
    });
 	   });
  </script>

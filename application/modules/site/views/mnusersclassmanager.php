@@ -59,6 +59,9 @@
                         <?php } ?>
                         
                     </table>
+                    <?php if (empty($uclass)) {
+                      echo "<p class='text-center'>Không tìm thấy bản ghi.</p>";
+                    } ?>
                     
                 </div> 
             </div>

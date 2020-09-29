@@ -4237,6 +4237,8 @@ if(intval($type)>0){
     $query.=" and FIND_IN_SET('".intval($type)."',t.LearnType)";
 }
 $db_qr = $this->db->query($query);
+// echo $this->db->last_query();
+// die();
 $tg1=0;
 if($db_qr->num_rows() > 0)
 {

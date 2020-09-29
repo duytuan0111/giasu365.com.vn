@@ -395,7 +395,7 @@
                 $('#tag_city').select2();
                 
                 $('#tinhthanh').val('<?php echo $keyfilter['place']  ?>').select2({ width: '100%',placeholder:"Chọn tỉnh thành" });
-                $('.btnsearchuv').on('click',function(){
+                $('.btnsearchuv').on('click',function(e){
                     var findkey=$('#findkey').val();
                     var strsubj=$('#monhoc').val();
                     var strtinhthanh=$('#tinhthanh').val();
@@ -420,6 +420,8 @@
                         },
                         success: function (reponse) {
                             if (reponse.kq == true) {
+                                // console.log(findkey, strsubj, strtinhthanh, strgioitinh, strtype);
+                                // console.log(reponse);
                                 window.location=reponse.data;
                             }
 

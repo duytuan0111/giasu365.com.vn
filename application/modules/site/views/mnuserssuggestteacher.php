@@ -58,6 +58,9 @@
                         <?php } ?>
                         
                     </table>
+                    <?php if (empty($giasudaluu)) {
+                      echo "<p class='text-center'>Không tìm thấy bản ghi.</p>";
+                    } ?>
                     
                 </div> 
             </div>

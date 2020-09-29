@@ -30,7 +30,7 @@
                 </div>
                 <div class="box-file-newest uvnewest">
                     <div class="title"><i class="fa fa-uv-document"></i> Gia sư đã mời dạy gần nhất
-                   
+                    
                     </div>
                     
                     <table class="uv-ungtuyen">
@@ -57,6 +57,9 @@
                             
                         </tbody>
                     </table>
+                    <?php if (empty($topteacherinvite)) {
+                        echo "<p class='text-center'>Không tìm thấy bản ghi.</p>";
+                    } ?>
                 </div>
                 <div class="box-file-newest uvnewest">
                     <div class="title"><i class="fa fa-disk-brown"></i> Gia sư đã lưu mới nhất

@@ -356,8 +356,9 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
         <div class="uvngaysinh"> 
             Ngày sinh: <?php if(empty($item->Birth)){echo "01/01/1970";}else{echo date('d/m/Y',strtotime($item->Birth));} ?>               
         </div>
-        <div class="uvgioitinh"> 
-         Giới tính: <?php echo GetSex(intval($item->Sex)); ?>               
+        <div class="uvgioitinh">
+       Giới tính: <?php echo GetSex(intval($item->Sex)); ?> 
+                       
      </div>
      <div class="uvhonnhan"> 
         Hôn nhân: Độc thân               
@@ -366,7 +367,7 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
         Địa chỉ: <?php echo $item->Addressu ?>               
     </div>
     <div class="uvsodienthoai"> 
-        SĐT:&nbsp;&nbsp;&nbsp;<span data-val="<?php echo "users_".$item->UserID ?>" id="txtviewphone" class="btnviewlienhe btnviewcontactinfo"><?php if($logpoint !=""){ echo $item->Phone;}else{echo "Xem liên hệ";} ?></span>               
+        SĐT:&nbsp;&nbsp;&nbsp;<span data-val="<?php echo "users_".$item->UserID ?>" id="txtviewphone" class="btnviewlienhe btnviewcontactinfo"><?php if($logpoint !=""){ echo $item->phoneu;}else{echo "Xem liên hệ";} ?></span>               
     </div>
     <div class="uvemail"> 
         Email:&nbsp;<span data-val="<?php echo "users_".$item->UserID ?>" id="txtviewemail" class="btnviewlienhe btnviewcontactinfo"><?php if($logpoint !=""){ echo $item->Email;}else{echo "Xem liên hệ";} ?></span>             
@@ -624,6 +625,35 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
 </div>
 </div>
 </div>
+<!-- <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Đăng nhập gia sư</a> -->
+<div class="modal fade" id="modal_login">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">ĐĂNG NHẬP TÀI KHOẢN GIA SƯ</h4>
+            </div>
+            <div class="modal-body">
+                    <form action="" method="POST" role="form" id="form-login">
+                    <div class="form-group" id="div_email_login">
+                        <input type="text" class="form-control" id="useremail" name="useremail"  placeholder="Nhập địa chỉ email của bạn">
+                    </div>
+                    <div class="form-group" id="div_password_login">
+                        <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Nhập mật khẩu">
+                    </div>
+                    <div class="info_loginone pull-right" style="margin-right: 17px;">
+                        <span class="howto">Bạn chưa có tài khoản?</span>
+                        <span class="btnregisteruv">Đăng ký</span></a>
+                    </div>
+                    </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="phuhuynhlogin12">Đăng Nhập</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="js/theme6/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
@@ -743,7 +773,7 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
                       $('#txtviewphone').text('<?php echo $item->Phone; ?>');
                       $('#txtviewemail').text('<?php echo $item->Email; ?>');
                   }else{
-                    alert('đăng kí tài khoản giasu');
+                    $('#modal_login').modal('show');
                 }
 
             },
@@ -754,6 +784,11 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
               $("#boxLoading").hide();
           }
       }); 
+        });
+
+        //btn dang ki
+        $('.btnregisteruv').click(function(event) {
+           window.location.href = '<?php echo base_url(); ?>dang-ky-nguoi-dung';
         });
         $('#btnmoigiaovien').on('click',function(){
             if($('#txtchonlop').val()!=''){

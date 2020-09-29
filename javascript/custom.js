@@ -540,7 +540,6 @@ function UserManager() {
       }
     });
   });
-
   /*
   $('#btnusersforgot').on('click',function(){
       if($('#emailuser').val()!=''){

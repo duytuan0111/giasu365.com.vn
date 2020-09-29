@@ -889,7 +889,7 @@ class admin extends Controller
 				'meta_title' 	=>	$meta_title,
 				'meta_key' 		=>	$meta_key,
 				'meta_des' 		=>	$meta_des							
-			); 		
+			);
 		$this->admin_model->add_tbl('baiviet',$data,$id);		 
 		$this->sitemap(); 
 		if($_SESSION['start_row']==0){redirect('admin/baiviet');}

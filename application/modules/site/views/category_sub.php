@@ -23,8 +23,7 @@ $urlweb=str_replace('_','.',$urlweb);
   <div class="container">
     <div class="row no-mrg">
       <!-- Start Blogs -->
-      
-
+      <h1><?php var_dump($query->result()); ?></h1>
         <?php if($query->num_rows()>0){
           foreach ($query->result() as $nub) {         						  
             ?>
@@ -32,7 +31,7 @@ $urlweb=str_replace('_','.',$urlweb);
             <article class="blog-news">
               <div class="short-blog">
                 <figure class="img-holder">
-                  <a class="imgnews" href="<?php echo site_url($nub->alias.'-b'.$nub->id.'.html'); ?>"><img src="<?echo base_url().'upload/news/thumb/'.$nub->image; ?>" alt="<?php echo $nub->title; ?>"></a>
+                  <a class="imgnews" href="<?php echo site_url($nub->alias.'-b'.$nub->id.'.html'); ?>"><img src="<?php echo base_url() ?>upload/news/thumb/<?php echo $nub->image; ?>" alt="<?php echo $nub->title; ?>"></a>
                   <div class="blog-post-date">
                     <?php 
                     $d = explode('-',explode(' ', $nub->created_day)[0]);
