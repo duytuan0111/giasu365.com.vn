@@ -436,6 +436,7 @@ function UserManager() {
       }
     }
   });
+  
   //================================
   $('#phuhuynhlogin').on('click', function() {
     var useremail = $('#useremail');

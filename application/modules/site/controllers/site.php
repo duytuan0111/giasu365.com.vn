@@ -3116,6 +3116,21 @@ function loginteacher()
            "Active"=> $active,
            "Balance"=>intval($balance->Balance));
           $_SESSION['UserInfo'] = $profileData;
+          /*+5 điểm miễn phí cho phụ huynh*/
+          $checkuser        = $this->site_model->check_users_point($profileData['UserId']);
+          $point_free_user  =  $this->site_model->get_point($profileData['UserId']);
+          var_dump($point_free_user);
+          if ($checkuser == true && $point_free_user[0]->point_free == 0) {
+            echo "update point free";
+          }
+          else {
+            echo "insert";
+          }
+          die();
+          $reset_day =time() ;
+          $this->site_model->inser_point($profileData['UserId'], $reset_day);
+          /**/
+
           $data=array('kq'=>true,'msg'=>'Đăng nhập thành công');
           $configpoint=$this->site_model->getpointconfig();
           $Trace="users_0";

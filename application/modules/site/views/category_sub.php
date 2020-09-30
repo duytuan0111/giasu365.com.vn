@@ -23,7 +23,6 @@ $urlweb=str_replace('_','.',$urlweb);
   <div class="container">
     <div class="row no-mrg">
       <!-- Start Blogs -->
-      <h1><?php var_dump($query->result()); ?></h1>
         <?php if($query->num_rows()>0){
           foreach ($query->result() as $nub) {         						  
             ?>

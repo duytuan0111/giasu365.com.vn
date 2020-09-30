@@ -19,6 +19,118 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
 <div class="container">
 <?php $this->load->view('headerfun'); ?>
 </div>
+<style type="text/css">
+.modal-header .modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+#modalviewcontact .modal-body {
+    float: left;
+    width: 50%;
+    position: relative;
+    padding: 15px;
+}
+element.style {
+    margin-bottom: 15px;
+}
+#modalviewcontact .form-control {
+    margin-bottom: 10px;
+}
+#modalviewcontact .btn-primary {
+    font-weight: 500;
+    line-height: 35px;
+    padding: 0 20px;
+    width: 100%;
+}
+.btn-primary {
+    border: 1px solid #00baba;
+    background-color: #00baba;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.btnx {
+    touch-action: manipulation;
+    cursor: pointer;
+}
+.linkregister {
+    width: 100%;
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 35px;
+    margin-bottom: 15px;
+    float: left;
+    color: #000;
+    font-size: 14px;
+}
+#modalviewcontact .notifymail {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+#modalviewcontact .modal-header .modal-title p {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #8a8a8a;
+}
+.fa-warning:before {
+    content: url(../images/icon-warning.png);
+    position: relative;
+    top: 11px;
+    margin-right: 3px;
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*Css modal trừ điểm*/
+.modal-header {
+    position: relative;
+}
+.modal-header {
+    border-bottom: 0;
+}
+#modelsendchat .notifymail {
+    border: 1px solid #eaeaeb;
+    background-color: #f7f8f9;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: -15px;
+    padding: 15px;
+    color:red;
+}
+.modal-body {
+    position: relative;
+    padding: 15px;
+}
+#modelsendchat .btn-secondary {
+    font-weight: 500;
+    line-height: 35px;
+    padding: 0 20px;
+    min-width: 120px;
+    margin: 0 5px;
+}
+#modelsendchat .btn-primary {
+    font-weight: 500;
+    line-height: 35px;
+    padding: 0 20px;
+    min-width: 115px;
+}
+.btn-secondary {
+    border: 1px solid #ffb11b;
+    background-color: #ffb11b;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+}
+</style>
 <section class="padd-top-20 padd-bot-20">
     <div class="container">
         <div class="row">
@@ -80,13 +192,10 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
                     <li class="color-orange">
                         <a><i class="fa fa-chat-white"></i> Gửi tin nhắn</a>
                     </li>
-                    <?php if($logpoint ==""){ ?> 
 
-                        <li>
-                            <a data-val="<?php echo "users_".$item->UserID ?>" class="btnviewcontactinfo"><i class="fa fa-view-att-white"></i> Xem liên hệ</a>
-                        </li>
-                    <?php } ?>
-
+                    <li>
+                        <a data-val="<?php echo "users_".$item->UserID ?>" class="btnviewcontactinfo"><i class="fa fa-view-att-white"></i> Xem liên hệ</a>
+                    </li>
                     <li>
                         <a class="btnluuhosogv"><i class="fa fa-block-download"></i> Lưu hồ sơ</a>
                     </li>
@@ -367,11 +476,14 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
         Địa chỉ: <?php echo $item->Addressu ?>               
     </div>
     <div class="uvsodienthoai"> 
-        SĐT:&nbsp;&nbsp;&nbsp;<span data-val="<?php echo "users_".$item->UserID ?>" id="txtviewphone" class="btnviewlienhe btnviewcontactinfo"><?php if($logpoint !=""){ echo $item->phoneu;}else{echo "Xem liên hệ";} ?></span>               
+        SĐT:&nbsp;&nbsp;&nbsp;<span id="viewphone"></span><span data-val="users_<?php echo $item->UserID ?>" id="txtviewphone" class="btnviewlienhe btnviewcontactinfo">Xem liên hệ</span>              
     </div>
-    <div class="uvemail"> 
-        Email:&nbsp;<span data-val="<?php echo "users_".$item->UserID ?>" id="txtviewemail" class="btnviewlienhe btnviewcontactinfo"><?php if($logpoint !=""){ echo $item->Email;}else{echo "Xem liên hệ";} ?></span>             
+     <div class="uvemail"> 
+        Email:&nbsp;<span id="viewmail"></span><span data-val="users_<?php echo $item->UserID ?>" id="txtviewemail" class="btnviewlienhe btnviewcontactinfo">Xem liên hệ</span>           
     </div>
+   <!--  <div class="uvemail"> 
+        Email:&nbsp;<?php if($logpoint !=""){ echo $item->Email;}else{echo '<span data-val="users_<?php echo $item->UserID ?>" id="txtviewemail" class="btnviewlienhe btnviewcontactinfo">Xem liên hệ</span>';} ?>             
+    </div> -->
 </div>
 <!-- <div class="box_job_search tagwork uvonline" style="display: none;">
     <h3>Gia sư đang online
@@ -625,31 +737,71 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
 </div>
 </div>
 </div>
-<!-- <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Đăng nhập gia sư</a> -->
-<div class="modal fade" id="modal_login">
-    <div class="modal-dialog">
+<!-- Modal dang nhap -->
+ <div class="modal fade" id="modalviewcontact" tabindex="-1" role="dialog" aria-labelledby="modelsendchatLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title">
+      <i class="fa fa-warning"></i> Đăng nhập tài khoản ứng viên
+      <p>Bạn cần đăng nhập để xem số điện thoại, email của NTD</p>
+    </div>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="notifymail">
+      <!-- <p>Quý khách không xem được thông tin liên hệ của ứng viên này do tài khoản của Quý khách không đủ điểm, click vào đây để nạp tiền</p> -->
+      <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="Vui lòng nhập tài khoản" style="margin-bottom: 15px;">
+      <input type="password" class="form-control" id="lg_pass" name="lg_pass" placeholder="Vui lòng nhập mật khẩu">
+      <button type="button" class="btnx btn-primary" id="phuhuynhlogin1">Đăng nhập</button>
+    </div>
+  </div>
+    <div class="modal-body">
+        <p style="margin-bottom: 0">Tải ngay ứng dụng Timviec356.com.vn</p>
+        <p style="font-size: 12px;color: #C4C4C4">Đã có trên Android và IOS</p>
+        <p class="url_app">
+            <a target="_blank" rel="nofollow" href="https://play.google.com/store/apps/details?id=vn.hunghacompany.job365">
+                <img src="<?php echo base_url(); ?>upload/images/btn_androi.png" alt="App Android">
+            </a>
+            <a target="_blank" rel="nofollow" href="https://apps.apple.com/us/app/id1499313178">
+                <img style="width: 154px;" src="<?php echo base_url(); ?>upload/images/download_appstore.png" class="lazyload" data-src="<?php echo base_url(); ?>upload/images/download_appstore.png" alt="App IOS">
+            </a>
+        </p>
+    </div>
+  <div class="modal-footer">
+      <div class="linkregister">    
+            <span>Bạn chưa có tài khoản? <a id="btnregisteruv" href="<?php echo base_url(); ?>dang-ky-nguoi-dung">đăng ký</a></span>
+        </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- end modal dang nhap -->
+<!-- Modal xem ho so -->
+<div class="modal fade" id="modelsendchat" tabindex="-1" role="dialog" aria-labelledby="modelsendchatLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title text-center">ĐĂNG NHẬP TÀI KHOẢN GIA SƯ</h4>
+                <div class="modal-title">Thông báo</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                    <form action="" method="POST" role="form" id="form-login">
-                    <div class="form-group" id="div_email_login">
-                        <input type="text" class="form-control" id="useremail" name="useremail"  placeholder="Nhập địa chỉ email của bạn">
-                    </div>
-                    <div class="form-group" id="div_password_login">
-                        <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Nhập mật khẩu">
-                    </div>
-                    <div class="info_loginone pull-right" style="margin-right: 17px;">
-                        <span class="howto">Bạn chưa có tài khoản?</span>
-                        <span class="btnregisteruv">Đăng ký</span></a>
-                    </div>
-                    </form>
+                <div class="notifymail">
+                    <p>Chức năng xem hồ sơ ứng viên có giá trị 1 điểm</p>
+                    <p>Quý khách vẫn muốn thực hiện chức năng này</p>
+                    <button type="button" class="btnx btn-secondary" data-dismiss="modal"><i class="fa fa-close"></i>
+                        Hủy bỏ
+                    </button>
+                    <button type="button" class="use_point btnx btn-primary" id="viewprofile"> Xác nhận</button>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="phuhuynhlogin12">Đăng Nhập</button>
+
             </div>
         </div>
     </div>
@@ -769,11 +921,10 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
                   $("#boxLoading").show();
               },
               success: function (reponse) {
-                  if (reponse.kq == true) {                          
-                      $('#txtviewphone').text('<?php echo $item->Phone; ?>');
-                      $('#txtviewemail').text('<?php echo $item->Email; ?>');
+                  if (reponse.kq == true) {
+                      $('#modelsendchat').modal('show');
                   }else{
-                    $('#modal_login').modal('show');
+                    $('#modalviewcontact').modal('show');
                 }
 
             },
@@ -786,10 +937,190 @@ $logpoint=$CI->site_model->getlogpoint($userid,$trace);
       }); 
         });
 
-        //btn dang ki
-        $('.btnregisteruv').click(function(event) {
-           window.location.href = '<?php echo base_url(); ?>dang-ky-nguoi-dung';
+        // xem ho so ung vien
+        $('#viewprofile').on('click', function(event) {
+           $('#modelsendchat').modal('hide');
+           $('#txtviewphone').remove();                          
+           $('#txtviewemail').remove();                          
+           $('#viewphone').text('<?php echo empty($item->Phone) ? 'Chưa cập nhật': $item->Phone  ?>');
+           $('#viewmail').text('<?php echo $item->Email; ?>');
         });
+
+        // dang nhap
+        $('#lg_username').keyup(function(event) {
+            if ($('#lg_username').val().length == 0) {
+                if ($('#lg_username').hasClass('errorClass') == false) {
+                    $('#lg_username').addClass('errorClass');
+                    $('#lg_username').after('<p class="emaillogin_error" style="color:red">Email không được để trống</p>');
+                }
+            } else {
+                $('#lg_username').removeClass('errorClass');
+                $('.emaillogin_error').remove();
+            }
+        });
+
+        $('#lg_pass').keyup(function(event) {
+            if ($('#lg_pass').val().length == 0) {
+                if ($('#lg_pass').hasClass('errorClass') == false) {
+                    $('#lg_pass').addClass('errorClass');
+                    $('#lg_pass').after('<p class="passwordlogin_error" style="color:red">Mật khẩu không được để trống</p>');
+                }
+            } else {
+                $('#lg_pass').removeClass('errorClass');
+                $('.passwordlogin_error').remove();
+            }
+        });
+
+        $('#lg_username').blur(function(event) {
+            var regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if ($('#lg_username').val().length == 0) {
+                if ($('#lg_username').hasClass('errorClass') == false) {
+                    $('#lg_username').addClass('errorClass');
+                    $('#lg_username').after('<p class="emaillogin_error" style="color:red">Email không được để trống</p>');
+                }
+                $('#lg_username').focus();
+            } else {
+                if (regex_email.test($('#lg_username').val()) == false) {
+                    if ($('#lg_username').hasClass('errorClass') == false) {
+                        $('#lg_username').addClass('errorClass');
+                        $('#lg_username').after('<p class="emaillogin_error" style="color:red">Email không đúng định dạng</p>');
+                    }
+                    $('#lg_username').focus();
+                } else {
+                    $('#lg_username').removeClass('errorClass');
+                    $('.emaillogin_error').remove();
+                } 
+            }
+        });
+
+        $('#lg_pass').blur(function(event) {
+            if ($('#lg_pass').val().length == 0) {
+                if ($('#lg_pass').hasClass('errorClass') == false) {
+                    $('#lg_pass').addClass('errorClass');
+                    $('#lg_pass').after('<p class="passwordlogin_error" style="color:red">Mật khẩu không được để trống</p>');
+                }
+                $('#lg_pass').focus();
+            } else {
+                if ($('#lg_pass').val().length < 6) {
+                    if ($('#lg_pass').hasClass('errorClass') == false) {
+                        $('#lg_pass').addClass('errorClass');
+                        $('#lg_pass').after('<p class="passwordlogin_error" style="color:red">Mật khẩu phải nhiều hơn 6 ký tự</p>');
+                    }
+                    $('#lg_pass').focus();
+                } else {
+                    $('#lg_pass').removeClass('errorClass');
+                    $('.passwordlogin_error').remove();
+                }
+            }
+        });
+
+        // phụ huynh login
+        $('#phuhuynhlogin1').on('click', function(event) {
+            var useremail = $('#lg_username');
+            var userpassword = $('#lg_pass');
+            var regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (useremail.val() == '') {
+                if ($('#lg_username').hasClass('errorClass') == false) {
+                    $('#lg_username').addClass('errorClass');
+                    $('#lg_username').after('<p id="emaillogin_error" style="color:red">Vui lòng nhập địa chỉ email</p');
+                }
+                useremail.focus();
+                return false;
+            } else {
+                if (regex_email.test(useremail.val() == false)) {
+                    if ($('#lg_username').hasClass('errorClass') == false) {
+                        $('#lg_username').addClass('errorClass');
+                        $('#lg_username').after('<p id="emaillogin_error" style="color:red">Email không đúng định dạng</p>');
+                    }
+                    useremail.focus();
+                    return false;
+                } else {
+                    useremail.removeClass('errorClass');
+                    $('#emaillogin_error').remove();
+                }
+            }
+            if (userpassword.val() == '') {
+                if ($('#lg_pass').hasClass('errorClass') == false) {
+                    $('#lg_pass').addClass('errorClass');
+                    $('#lg_pass').after('<p id="passwordlogin_error" style="color:red">Mật khẩu không được để trống</p>');
+                }
+                userpassword.focus();
+                return false;
+            } else {
+                if ($('#lg_pass').val().length < 6) {
+                    if ($('#lg_pass').hasClass('errorClass') == false) {
+                        $('#lg_pass').addClass('errorClass');
+                        $('#lg_pass').after('<p id="passwordlogin_error" style="color:red">Mật khẩu phải nhiều hơn 6 ký tự</p>');
+                    }
+                    userpassword.focus();
+                    return false;
+                } else {
+                    userpassword.removeClass('errorClass');
+                    $('#passwordlogin_error').remove();
+                }
+            }
+
+            var cknhatuyendung = 0;
+
+            $.ajax({
+              url: configulr + "site/loginusers",
+              type: "POST",
+              data: {
+                username: $('#lg_username').val(),
+                password: $('#lg_pass').val(),
+                typelogin: cknhatuyendung
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                $("#boxLoading").show();
+            },
+            success: function(reponse) {
+                if (reponse.kq == true) {
+                  window.location.reload();
+              } else {
+                  var clickcomfirm=confirm(reponse.msg);
+                  if (clickcomfirm==true)
+                  {
+                      var useremail = $('#lg_username').val();
+                      $.ajax({
+                        url: configulr+"/site/forgetmail2",
+                        type: "POST",
+                        data:{
+                          email:useremail
+                      },
+                      dataType: 'json',
+                      success: function (res) 
+                      { 
+                        if (res.kq == true) 
+                        {   
+                            alert('Vui lòng kiểm tra tin email để nhận mã xác thực kích hoạt tài khoản');
+                        }
+                    },
+                    error: function (xhr) 
+                    {
+                        console.log(xhr);
+                    },
+                    complete: function () 
+                    {
+                        $("#boxLoading").hide();
+                    }
+                });
+                  }
+                  else
+                  {
+              // alert(reponse.msg);
+          }
+      }
+  },
+  error: function(xhr) {
+    alert("error");
+},
+complete: function() {
+    $("#boxLoading").hide();
+}
+});
+        });
+          
         $('#btnmoigiaovien').on('click',function(){
             if($('#txtchonlop').val()!=''){
                 $.ajax(

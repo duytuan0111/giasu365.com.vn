@@ -229,7 +229,7 @@ function resendmail3($email){
     $body = base64_encode($body);
     $this->CreateSendMail('timviec365-noreply@timviec365.com.vn',$email, "", "", $subject, $body);
     $arr = ['kq' => true , 'msg'=> 'Yêu cầu gửi lại email xác nhận tài khoản thành công. Vui lòng kiểm tra hộp thư đến hoặc hộp thư spam.'];
-    return $arr;
+        return $arr;
     }
     else{
         $arr = ['kq' => false , 'msg'=> 'Đăng nhập thất bại'];
@@ -1528,7 +1528,27 @@ function getconfig()
     }
 
 }
+function check_users_point($userid) 
+{
+    $data   = ['kq' => false, 'message' => ''];
+    $sql    = "SELECT id FROM users_point WHERE userid ='".$userid."'";
+    $query  = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+        $data = ['kq' => true, 'message' => '1'];
+    }
+    return $data;
+}
+function get_point($userid) 
+{
+    $sql = "SELECT * FROM users_point where userid='".$userid."'";
+    return $query = $this->db->query($sql)->result();
 
+}   
+function inser_point($userid, $reset_day) 
+{
+    $sql    = "INSERT INTO users_point(userid, point_free, reset_day) VALUES('".$userid."', '5', '".$reset_day."')";
+    return  $query  = $this->db->query($sql); 
+}
 function checknews($id)
 {
     $sql = "SELECT * FROM teacherclass WHERE UserID = '".$id."'";
@@ -1582,7 +1602,7 @@ function Checktoken($token,$userid)
    $db_qr = $this->db->query("SELECT * FROM tokens WHERE AuthToken = '".$token."' AND userid = '".$userid."' LIMIT 1");
    if($db_qr->num_rows() > 0)
    {
-          $row = $db_qr->row();//mysql_fetch_assoc($db_qr->result);
+          $row = $db_qr->row();//mysql_fetch_assoc($db_qr->mysql_fetch_row);
           $expired = $row['ExpiresOn'];
           $expired = strtotime($expired);
           if($expired < time())
