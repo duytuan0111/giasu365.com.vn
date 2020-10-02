@@ -3052,6 +3052,53 @@ function loginuser()
         //return json_encode($data);
   echo json_encode($data);
 }
+// Trừ điểm xem hồ sơ.
+function viewteacherinfo()
+{
+  $data = ['status' => 0, 'msg' => ''];
+  $userid     = $_POST['userid'];
+  $teacherid  = $_POST['teacherid'];
+  $checkuser        = $this->site_model->check_users_point($userid);
+  if ($checkuser['kq'] == true) {
+    $userinfo   = $this->site_model->get_point($userid);
+    $date_viewed = time();
+    $point_free = $userinfo[0]->point_free;
+    $point_pay  = $userinfo[0]->point_pay;
+    if ($point_free >= 1) {
+      $point_free_update = $point_free - 1;
+      $update_user_point = $this->site_model->update_point_fp($userid,$point_type='point_free',$point_free_update);
+      if ($update_user_point) {
+        $data['status'] = 1;
+        // check user point log
+        $check_log = $this->site_model->check_users_point_log($userid, $teacherid);
+        if ($check_log['kq'] == false) {
+           $this->site_model->insert_point_log($userid, $teacherid, $type='1', $date_viewed);
+        } else {
+          $this->site_model->update_point_log_fp($userid, $teacherid, $type='1', $date_viewed);
+        }
+        // 
+      }
+    } elseif ($point_pay >= 1) {
+      $point_pay_update = $point_pay - 1;
+      $update_user_point = $this->site_model->update_point_fp($userid,$point_type='point_pay',$point_pay_update);
+      if ($update_user_point) {
+        $data['status'] = 2;
+        // check user point log
+        $check_log = $this->site_model->check_users_point_log($userid, $teacherid);
+        if ($check_log['kq'] == false) {
+           $this->site_model->insert_point_log($userid, $teacherid, $type='2', $date_viewed);
+        } else {
+          $this->site_model->update_point_log_fp($userid, $teacherid, $type='2', $date_viewed);
+        }
+        // 
+      }
+    } else {
+      $data['status'] = 3;
+    }
+    
+  }
+    echo json_encode($data);
+}
 function loginteacher()
 {
   $password = $this->input->post('password');
@@ -3117,20 +3164,20 @@ function loginteacher()
            "Balance"=>intval($balance->Balance));
           $_SESSION['UserInfo'] = $profileData;
           /*+5 điểm miễn phí cho phụ huynh*/
+          $user_poin_info   = $this->site_model->get_point($profileData['UserId']);
+          $user_reset_day   = new DateTime(date('Y-m-d H:i:s', $user_poin_info[0]->reset_day));
+          $time             = new DateTime(date('Y-m-d H:i:s'));
           $checkuser        = $this->site_model->check_users_point($profileData['UserId']);
-          $point_free_user  =  $this->site_model->get_point($profileData['UserId']);
-          var_dump($point_free_user);
-          if ($checkuser == true && $point_free_user[0]->point_free == 0) {
-            echo "update point free";
+          $diff             = $user_reset_day->diff($time);
+          $reset_day = time();
+          if ($checkuser['kq'] == true) {
+            if ($diff->format('%d') >= 1) {
+              $this->site_model->update_point($profileData['UserId'], $reset_day);
+            }
+          }else {
+            $this->site_model->insert_point($profileData['UserId'], $reset_day);
           }
-          else {
-            echo "insert";
-          }
-          die();
-          $reset_day =time() ;
-          $this->site_model->inser_point($profileData['UserId'], $reset_day);
           /**/
-
           $data=array('kq'=>true,'msg'=>'Đăng nhập thành công');
           $configpoint=$this->site_model->getpointconfig();
           $Trace="users_0";

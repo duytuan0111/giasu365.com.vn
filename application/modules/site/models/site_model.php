@@ -1538,16 +1538,56 @@ function check_users_point($userid)
     }
     return $data;
 }
+function check_users_point_log($userid, $teacherid) 
+{
+    $data   = ['kq' => false, 'message' => ''];
+    $sql    = "SELECT id FROM users_point_log WHERE userid ='".$userid."' AND teacherid ='".$teacherid."'";
+    $query  = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+        $data = ['kq' => true, 'message' => '1'];
+    }
+    return $data;
+}
+function check_users_point_log_by($userid, $teacherid, $type1, $type2) 
+{
+    $data   = ['kq' => false, 'message' => ''];
+    $sql    = "SELECT id FROM users_point_log WHERE userid ='".$userid."' AND teacherid ='".$teacherid."' AND type='".$type1."' OR type = '".$type2."'";
+    $query  = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+        $data = ['kq' => true, 'message' => '1'];
+    }
+    return $data;
+}
 function get_point($userid) 
 {
     $sql = "SELECT * FROM users_point where userid='".$userid."'";
     return $query = $this->db->query($sql)->result();
 
 }   
-function inser_point($userid, $reset_day) 
+function insert_point($userid, $reset_day) 
 {
-    $sql    = "INSERT INTO users_point(userid, point_free, reset_day) VALUES('".$userid."', '5', '".$reset_day."')";
+    $sql    = "INSERT INTO users_point(userid, point_free, point_pay, point_return, reset_day) VALUES('".$userid."', '5', '0', '0','".$reset_day."')";
     return  $query  = $this->db->query($sql); 
+}
+function insert_point_log($userid, $teacherid, $type, $date_viewed) 
+{
+    $sql    = "INSERT INTO users_point_log(userid, teacherid, type, date_viewed) VALUES('".$userid."', '".$teacherid."', '".$type."','".$date_viewed."')";
+    return  $query  = $this->db->query($sql); 
+}
+function update_point($userid, $reset_day)
+{ 
+    $sql = "UPDATE `users_point` SET `point_free` = '5' , `reset_day` = '".$reset_day."' WHERE userid = '".$userid."'";
+    return $query = $this->db->query($sql);
+}
+function update_point_fp($userid, $point_type, $point)
+{ 
+    $sql = "UPDATE `users_point` SET `".$point_type."` = '".$point."'  WHERE userid = '".$userid."'";
+    return $query = $this->db->query($sql);
+}
+function update_point_log_fp($userid, $teacherid, $type, $date_viewed)
+{ 
+    $sql = "UPDATE `users_point_log` SET `type` = '".$type."', `date_viewed` ='".$date_viewed."'  WHERE userid = '".$userid."' AND teacherid ='".$teacherid."'";
+    return $query = $this->db->query($sql);
 }
 function checknews($id)
 {

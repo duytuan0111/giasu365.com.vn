@@ -5,11 +5,29 @@ $CI=&get_instance();
 $CI->load->model('site/site_model');
 if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
     $tg=$_SESSION['UserInfo'];
+    $teacher_viewed = 0;
     if($tg['Type']==2){
         $urlgiasu='2';
     }else{
         $urlgiasu='1';
     }
+    // Nếu là phụ huynh login thì thêm vào tbl view log
+    if ($tg['UserType'] == 0) {
+        $userid = $tg['UserId'];
+        $teacherid = $item->UserID;
+        $check_log = $CI->site_model->check_users_point_log($userid, $teacherid);
+        if ($check_log['kq'] == false) {
+           $date_viewed = time();
+           $CI->site_model->insert_point_log($userid, $teacherid, $type='0', $date_viewed);
+        } else {
+            $check_type = $CI->site_model->check_users_point_log_by($userid, $teacherid, $type1='1', $type2='2');
+            if ($check_type['kq'] == true) {
+                $teacher_viewed = 1;
+            }
+
+        }
+    }
+    // 
 }
 $userid=$tg['UserId'];
 $kq=$CI->site_model->countclassnotteacherbyuserid($userid);
@@ -192,10 +210,11 @@ element.style {
                     <li class="color-orange">
                         <a><i class="fa fa-chat-white"></i> Gửi tin nhắn</a>
                     </li>
-
+                    <?php if ($teacher_viewed == 0) { ?>
                     <li>
                         <a data-val="<?php echo "users_".$item->UserID ?>" class="btnviewcontactinfo"><i class="fa fa-view-att-white"></i> Xem liên hệ</a>
                     </li>
+                    <?php } ?>
                     <li>
                         <a class="btnluuhosogv"><i class="fa fa-block-download"></i> Lưu hồ sơ</a>
                     </li>
@@ -367,9 +386,8 @@ element.style {
 <ul class="blockfun">
  <!--    <li class="color-orange">
         <a><i class="fa fa-chat-white"></i> Gửi tin nhắn</a>
-    </li> -->
-    <?php if($logpoint !=""){ ?> 
-    <?php }else{?> 
+    </li> --> 
+    <?php if ($teacher_viewed == 0) { ?> 
         <li>
             <a data-val="<?php echo "users_".$item->UserID ?>" class="btnviewcontactinfo"><i class="fa fa-view-att-white"></i> Xem liên hệ</a>
         </li>
@@ -476,14 +494,21 @@ element.style {
         Địa chỉ: <?php echo $item->Addressu ?>               
     </div>
     <div class="uvsodienthoai"> 
-        SĐT:&nbsp;&nbsp;&nbsp;<span id="viewphone"></span><span data-val="users_<?php echo $item->UserID ?>" id="txtviewphone" class="btnviewlienhe btnviewcontactinfo">Xem liên hệ</span>              
+        SĐT:&nbsp;&nbsp;&nbsp;
+        <?php if ($teacher_viewed == 1) { ?>
+           <span id='viewphone'><?php echo (!empty($item->phoneu)) ? $item->phoneu: 'Chưa cập nhật'; ?></span>
+        <?php } else { ?>
+            <span data-val='users_<?php echo $item->UserID ?>' id='txtviewphone' class='btnviewlienhe btnviewcontactinfo'>Xem liên hệ</span>
+        <?php } ?>             
     </div>
      <div class="uvemail"> 
-        Email:&nbsp;<span id="viewmail"></span><span data-val="users_<?php echo $item->UserID ?>" id="txtviewemail" class="btnviewlienhe btnviewcontactinfo">Xem liên hệ</span>           
+        Email:&nbsp;
+        <?php if ($teacher_viewed == 1) { ?>
+            <span id='viewemail'><?php echo $item->Email; ?></span>
+        <?php } else { ?>
+        <span data-val='users_<?php echo $item->UserID ?>' id='txtviewemail' class='btnviewlienhe btnviewcontactinfo'>Xem liên hệ</span>  
+        <?php } ?>       
     </div>
-   <!--  <div class="uvemail"> 
-        Email:&nbsp;<?php if($logpoint !=""){ echo $item->Email;}else{echo '<span data-val="users_<?php echo $item->UserID ?>" id="txtviewemail" class="btnviewlienhe btnviewcontactinfo">Xem liên hệ</span>';} ?>             
-    </div> -->
 </div>
 <!-- <div class="box_job_search tagwork uvonline" style="display: none;">
     <h3>Gia sư đang online
@@ -939,11 +964,41 @@ element.style {
 
         // xem ho so ung vien
         $('#viewprofile').on('click', function(event) {
-           $('#modelsendchat').modal('hide');
-           $('#txtviewphone').remove();                          
-           $('#txtviewemail').remove();                          
-           $('#viewphone').text('<?php echo empty($item->Phone) ? 'Chưa cập nhật': $item->Phone  ?>');
-           $('#viewmail').text('<?php echo $item->Email; ?>');
+            var userid      = <?php echo (!empty($userid))?  $userid :  0  ?>;
+            var teacherid   = <?php echo (!empty($teacherid)) ? $teacherid : 0?>;
+            $.ajax({
+                url: configulr+'site/viewteacherinfo',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {userid: userid, teacherid: teacherid},
+                success: function (response) {
+                    if (response.status == 1 || response.status == 2) {
+                      $('#modelsendchat').modal('hide');
+                      window.location.reload();
+                      // $('#txtviewphone').remove();                          
+                      // $('#txtviewemail').remove();                          
+                      // $('#viewphone').text('<?php echo empty($item->Phone) ? 'Chưa cập nhật': $item->Phone  ?>');
+                      // $('#viewmail').text('<?php echo $item->Email; ?>');
+                  } else {
+                        $('#modelsendchat').modal('hide');
+                        if (confirm("Bạn đã dùng hết số điểm của mình, bạn có muốn mua thêm không ?")) {
+                            window.location.href = "https://timviec365.com.vn/bang-gia";
+                        }
+                  }
+                },
+                error: function (xhr) {
+                    window.alert('error');
+                }
+            })
+            
+            
+           /*show info*/
+           // $('#modelsendchat').modal('hide');
+           // $('#txtviewphone').remove();                          
+           // $('#txtviewemail').remove();                          
+           // $('#viewphone').text('<?php echo empty($item->Phone) ? 'Chưa cập nhật': $item->Phone  ?>');
+           // $('#viewmail').text('<?php echo $item->Email; ?>');
+
         });
 
         // dang nhap

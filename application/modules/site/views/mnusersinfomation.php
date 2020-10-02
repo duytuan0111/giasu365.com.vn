@@ -23,9 +23,9 @@
                             <div class="uvinfoheader-l">
                                 <span class="uvimgrepresent">
                                 <?php if(empty($uinfo->Image)) {?>
-                                <img src="images/no-image2.png" alt="" class="img-t-01">
+                                <img src="<?php echo base_url(); ?>images/no-image2.png" alt="" class="img-t-01">
                                 <?php } else {?>
-                                <img src="/upload/images/<?php echo $uinfo->Image ?>" class="img-t-01" />
+                                <img src="<?php echo base_url(); ?>upload/images/<?php echo $uinfo->Image ?>" class="img-t-01" />
                                 <?php } ?>
                                 
                                 <input type="file" id="file" name="file" title=" "  class="input-t"/>

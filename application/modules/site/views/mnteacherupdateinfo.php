@@ -45,7 +45,7 @@ $CI->load->model('site/site_model');
                                     <img src="<?php echo base_url(); ?>upload/users/thumb/<?php echo $tg[2]."/".$tg[1]."/".$tg[0]."/".$info->Image  ?>" width="100px" height="100px"/>
                                     <?php } 
                                     else {?>
-                                    <img src="<?php echo base_url();?>images/no-image2.png ?>" width="100px" height="100px"/>
+                                    <img src="<?php echo base_url();?>upload/images/no-image2.png" width="100px" height="100px"/>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@ $CI->load->model('site/site_model');
                                     <img src="<?php echo base_url(); ?>upload/users/thumb/<?php echo $tg[2]."/".$tg[1]."/".$tg[0]."/".$info->ImgPassport  ?>" width="60px" height="60px"/>
                                     <?php } 
                                     else {?>
-                                    <img src="<?php echo base_url(); ?>images/no-image2.png ?>" width="100px" height="100px"/>
+                                    <img src="<?php echo base_url(); ?>upload/images/no-image2.png" width="100px" height="100px"/>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -685,7 +685,7 @@ $('#datetimepicker1').datetimepicker({
             data.append('cmnduser', filecmnd);
             
         $.ajax({
-                  url: configulr+"/site/ajaxteacherupdateinfo",
+                  url: configulr+"site/ajaxteacherupdateinfo",
                   type: "POST",
                   contentType: false,
                   processData: false,
