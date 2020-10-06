@@ -1,12 +1,19 @@
 <?php
 $CI=&get_instance();
 $CI->load->model('site/site_model');
+$type = 3;
 if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
     $tg=$_SESSION['UserInfo'];
     if($tg['Type']==2){
         $urlgiasu='2';
     }else{
         $urlgiasu='1';
+    }
+    //
+    if ($tg['UserType'] == 1) {
+        $type = 1;
+    } else {
+        $type = 0;
     }
     }
     $userid=$tg['UserId'];
@@ -30,7 +37,7 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
             <div class="col-md-2 col-sm-12 padd-r-0">
                 <div class="detailjob-header">
                     <?php if(!empty($item->Image)){?>
-                                        <img class="img-responsive" src="<?= gethumbnail(geturlimageAvatar(strtotime($item->CreateDate)).$item->Image,$item->Image,strtotime($item->CreateDate),180,180,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                        <img class="img-responsive" src="<?php gethumbnail(geturlimageAvatar(strtotime($item->CreateDate)).$item->Image,$item->Image,strtotime($item->CreateDate),180,180,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                     <?php }else{ ?>
                                      <img class="img-responsive" src="images/no-image2.png" alt="<?php echo $item->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                      <?php } ?>
@@ -51,8 +58,8 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
                         <span class="jobview"><?php if($item->denghiday > 0){echo "Có ".$item->denghiday." đề nghị dạy";}else{echo "Chưa có đề nghị nào";} ?></span>
                         
                         <div class="divbtn">
-                        <?php if($urlgiasu=='2'){ ?>
-                        <span class="btn btndenghiday" data-val="<?php echo $item->ClassID ?>">Đề nghị dạy</span><?php } ?><span class="btn btnactive">Đăng yêu cầu mới</span>
+                        <?php if($type == 1){ ?>
+                        <span class="btn btndenghiday" data-val="<?php echo $item->ClassID ?>">Đề nghị dạy</span><?php } else { ?><span class="btn btnactive">Đăng yêu cầu mới</span> <?php } ?>
                         </div>                        
                         
                         <ul>
@@ -269,7 +276,7 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
                         <li>
                             <a class="btnsaveclass" data-val="<?php echo $item->ClassID ?>"><i class="fa fa-block-download"></i> Lưu hồ sơ</a>
                         </li>
-                        <?php if($urlgiasu=='2'){ ?>
+                        <?php if($type== 1){ ?>
                         <li>
                             <a class="btndenghiday" data-val="<?php echo $item->ClassID ?>"><i class="fa fa-uv-upload-small"></i> Đề nghị dạy</a>
                         </li>
@@ -431,7 +438,7 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
                                <div class="company_logo">
                                   <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" title="<?php echo $n->ClassTitle; ?>">
                                     <?php if(!empty($n->Image)){?>
-                                        <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                        <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                     <?php }else{ ?>
                                      <img src="images/no-image2.png" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                      <?php } ?>
@@ -500,12 +507,24 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
   </div>
 <script>
     $(document).ready(function() {
-        var configulr='<?php echo site_url() ?>';
-        $('#monhoc').select2({ width: '100%',placeholder:"Chọn môn học" });
+       var configulr='<?php echo site_url() ?>';
+       $('#monhoc').select2({ width: '100%',placeholder:"Chọn môn học" });
        $('#chudehoc').select2({ width: '100%',placeholder: "Chọn chủ đề"});
        $('#gioitinh').select2({ width: '100%',placeholder:"Chọn giới tính" });
        $('#hinhthuchoc').select2({ width: '100%',placeholder:"Chọn hình thức học" });
        $('#tinhthanh').select2({ width: '100%',placeholder:"Chọn tỉnh thành" });
+       // dang yeu cau moi
+       $('.btnactive').on('click', function(event) {
+          var type = <?php echo isset($type) ? $type : 3 ?>;
+          if (type == 1) {
+            if(confirm('Bạn có muốn đăng nhập phụ huynh để thực hiện chức năng này không?')) {
+                window.location.href = configulr+'phu-huynh-dang-nhap';
+            }
+          }
+          else {
+            window.location.href = configulr+'mn-hv-dang-tin';
+          }
+       });
        $('#monhoc').change(function () {
             var monhoc=$(this).val();
             if(monhoc != '' || monhoc !=0){
@@ -593,7 +612,7 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
                      if(obj.kq ==true){
                         alert(obj.data);
                         }else{
-                            alert('Bạn cần đăng nhập hoặc bạn phải là giáo viên');
+                            alert('Bạn đã gửi thông tin ứng tuyển dạy lớp học này');
                         }
                   },
                   error: function (xhr) {

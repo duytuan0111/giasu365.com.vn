@@ -24,7 +24,7 @@ if($urlweb != $canonical)
 				<div class="container white-shadow">				
 					<div class="row">
 						<div class="detail-pic">
-							<img src="<?= gethumbnail(geturlimageAvatar($itemcom->usc_create_time).$itemcom->usc_logo,$itemcom->usc_logo,$itemcom->usc_create_time,155,155,95) ?>" class="detailecom" onerror='this.onerror=null;this.src="images/no-image.png";' alt="<?php echo $n->usc_company ?>">					
+							<img src="<?php gethumbnail(geturlimageAvatar($itemcom->usc_create_time).$itemcom->usc_logo,$itemcom->usc_logo,$itemcom->usc_create_time,155,155,95) ?>" class="detailecom" onerror='this.onerror=null;this.src="images/no-image.png";' alt="<?php echo $n->usc_company ?>">					
 						</div>
 						<div class="detail-status">
 							<!--<span>10 Min Days Ago</span>-->
@@ -98,7 +98,7 @@ if($urlweb != $canonical)
                             <div class="col-md-4 col-sm-6">
     							<div class="grid-view brows-job-list">
     								<div class="brows-job-company-img">
-    									<img src="<?= gethumbnail(geturlimageAvatar($n->usc_create_time).$n->usc_logo,$n->usc_logo,$n->usc_create_time,80,80,85) ?>" alt="<?php echo $n->usc_company ?>">
+    									<img src="<?php gethumbnail(geturlimageAvatar($n->usc_create_time).$n->usc_logo,$n->usc_logo,$n->usc_create_time,80,80,85) ?>" alt="<?php echo $n->usc_company ?>">
     								</div>
     								<div class="brows-job-position">
     									<h3><a target="_blank" href="<?php echo base_url()."".vn_str_filter($n->new_title)."-job".$n->new_id.".html"; ?>"><?php echo $n->new_title ?></a> 

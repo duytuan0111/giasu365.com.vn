@@ -706,7 +706,7 @@ function getimage($nameimage,$width,$height,$timeimage)
 function gethumbnail($url,$nameimg,$timeimage,$width2,$height2,$optimize)
 {
     require_once 'resize_helper.php';
-    //$this->load->helper('resize');
+    // $this->load->helper('resize');
     $url = str_replace("..","",$url);
   //var_dump($url);die();
     

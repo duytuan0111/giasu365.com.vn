@@ -53,7 +53,7 @@
 							<div class="brows-company">
 								<div class="col-md-2 col-sm-2">
 									<div class="brows-company-pic">
-										<a href="<?php echo base_url()."".vn_str_filter($n->usc_company)."-ntd".$n->usc_id.".html"; ?>" class="careerfy-employer-grid-image"><img src="<?= gethumbnail(geturlimageAvatar($n->usc_create_time).$n->usc_logo,$n->usc_logo,$n->usc_create_time,80,80,85) ?>" onerror='this.onerror=null;this.src="images/no-image.png";' alt="<?php echo $n->usc_company ?>"></a>
+										<a href="<?php echo base_url()."".vn_str_filter($n->usc_company)."-ntd".$n->usc_id.".html"; ?>" class="careerfy-employer-grid-image"><img src="<?php gethumbnail(geturlimageAvatar($n->usc_create_time).$n->usc_logo,$n->usc_logo,$n->usc_create_time,80,80,85) ?>" onerror='this.onerror=null;this.src="images/no-image.png";' alt="<?php echo $n->usc_company ?>"></a>
 									</div>
 								</div>
 								<div class="col-md-4 col-sm-4">

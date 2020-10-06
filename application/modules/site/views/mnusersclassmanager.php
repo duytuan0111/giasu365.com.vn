@@ -42,8 +42,9 @@
                                 <td><?php echo number_format($n->Money)." vnđ/h"; ?></td>
                                 <td><?php echo $n->SubjectName ?></td>       
                                 <td class="actionjob">
-                                    <a class="btnntdupdate" data-val="<?php echo $n->ClassID ?>" data-id="<?php echo $n->ClassID ?>"><i class="fa fa-refresh"></i> Cập nhật </a>
-                                    <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" target="_blank" class="btnntdviewdetail"><i class="fa fa-view-detail"></i> Chi tiết</a>
+                                    <a class="btn btnntdupdate" data-val="<?php echo $n->ClassID ?>" data-id="<?php echo $n->ClassID ?>"><i class="fa fa-refresh"></i> Sửa </a>
+                                    <a data-val="<?php echo $n->ClassID ?>" id="xoalopdadang" class="btn btnntddelete"><i class="fa fa-trash"></i> Xóa</a>
+                                    <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" target="_blank" class="btn btnntdviewdetail"><i class="fa fa-view-detail"></i> Chi tiết</a>
                                 </td>                         
                             </tr>
                             <?php } } ?>
@@ -77,6 +78,27 @@
         $('.teacherinvite').on('click','a.btnntdupdate',function(){
            var tg= $(this).attr('data-val');
             window.location.href='<?php echo site_url('mn-hv-dang-tin')."/" ?>'+tg;
+        });
+        // xóa tin đăng tìm lớp học
+        $('body').on('click', '#xoalopdadang', function(event) {
+            if (confirm('bạn có chắc muốn xóa bản ghi này không ?')) {
+                var ClassID = $(this).attr('data-val');
+                $.ajax({
+                    url: configulr + 'site/ajaxdeleteteacherclass',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: {ClassID: ClassID},
+                    success: function() {
+                        window.location.reload();
+                    },
+                    error: function(xhr) {
+                        alert('Xóa không thành công');
+                    }
+                })
+        
+
+                
+            }
         });
         });
   </script>

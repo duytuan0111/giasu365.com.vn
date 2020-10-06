@@ -25,7 +25,7 @@
                     </div>
                     <div class="tablediv">
                         <div class="clr" style="height:10px;"></div>
-                        <div class="uvactiventd">                            
+                        <!-- <div class="uvactiventd">                            
                             <span style="display:inline-block;float:left;margin-right:20px;">Cho phép nhà tuyển dụng tìm kiếm (Ẩn / Hiện hồ sơ):</span>
                             <label for="uvduyetsearch">
                               <input value="1"<?php if($uinfo->IsSearch==1){ ?> checked="checked"<?php } ?> type="checkbox" name="uvduyetsearch" id="uvduyetsearch" class="uvduyetsearch"/>
@@ -35,7 +35,7 @@
                               </div>  
                               <i></i>
                             </label>                            
-                        </div>
+                        </div> -->
                         <div class="clearfix" style="height:8px;"></div>
                         <div class="divbantinhangngay" style="overflow: hidden;">
                             <span>Nhận bản tin việc làm:</span>
@@ -82,42 +82,42 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 	    var configulr='<?php echo base_url(); ?>';
-        $('.uvactiventd input[name="uvduyetsearch"]').each(function () {
-    $(this).change(function () {
-        /*if($(this).prop('checked')==true){
-            alert('đã bật search');
-        }*/
-        cknhatuyendung=1;
-        if(typeof ($('.uvactiventd input[name="uvduyetsearch"]:checked').val())=== "undefined"){
-            cknhatuyendung=0;
-        };
-        $.ajax(
-              {                  
-                  url: configulr+"site/ajaxupdateissearch",
-                  type: "POST",
-                  data: { issearch:cknhatuyendung},
-                  dataType: 'json',
-                  beforeSend: function () {
-                      $("#boxLoading").show();
-                  },
-                  success: function (reponse) {
-                      if (reponse.kq == true) {
-                          alert(reponse.data);
-                      }else{
-                        alert('Thay đổi trạng thái thất bại');
-                      }
+    //     $('.uvactiventd input[name="uvduyetsearch"]').each(function () {
+    // $(this).change(function () {
+    //     /*if($(this).prop('checked')==true){
+    //         alert('đã bật search');
+    //     }*/
+    //     cknhatuyendung=1;
+    //     if(typeof ($('.uvactiventd input[name="uvduyetsearch"]:checked').val())=== "undefined"){
+    //         cknhatuyendung=0;
+    //     };
+    //     $.ajax(
+    //           {                  
+    //               url: configulr+"site/ajaxupdateissearch",
+    //               type: "POST",
+    //               data: { issearch:cknhatuyendung},
+    //               dataType: 'json',
+    //               beforeSend: function () {
+    //                   $("#boxLoading").show();
+    //               },
+    //               success: function (reponse) {
+    //                   if (reponse.kq == true) {
+    //                       alert(reponse.data);
+    //                   }else{
+    //                     alert('Thay đổi trạng thái thất bại');
+    //                   }
                       
-                  },
-                  error: function (xhr) {
-                      alert("error");
-                  },
-                  complete: function () {
-                      $("#boxLoading").hide();window.location.reload();
-                  }
-              }); 
-        /*alert($('.uvactiventd input[name="uvduyetsearch"]:checked').val());*/
-    });
-    });
+    //               },
+    //               error: function (xhr) {
+    //                   alert("error");
+    //               },
+    //               complete: function () {
+    //                   $("#boxLoading").hide();window.location.reload();
+    //               }
+    //           }); 
+    //     /*alert($('.uvactiventd input[name="uvduyetsearch"]:checked').val());*/
+    // });
+    // });
     $('.uvthaydoibantin').on('click',function(){
         $('#myModal').modal('show');
     });

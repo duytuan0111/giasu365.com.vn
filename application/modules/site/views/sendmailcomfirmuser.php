@@ -25,10 +25,10 @@
   $(document).ready(function () {
     var configulr='<?php echo site_url(); ?>';
     $('.guilai').on('click',function(){
-        var id = '<?= $tg['UserId']; ?>';
-        var name = '<?= $tg["UserName"]; ?>';
-        var email = '<?= $tg["EmailAddress"]; ?>';
-        var type = '<?= $tg["UserType"]; ?>';
+        var id = '<?php $tg['UserId']; ?>';
+        var name = '<?php $tg["UserName"]; ?>';
+        var email = '<?php $tg["EmailAddress"]; ?>';
+        var type = '<?php $tg["UserType"]; ?>';
         $.ajax({      
           url: configulr+"/site/sendmail",
           type: "POST",

@@ -2,6 +2,7 @@
 
 $urlgiasu='0';
 $CI=&get_instance();
+$type = 3;
 $CI->load->model('site/site_model');
 if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
     $tg=$_SESSION['UserInfo'];
@@ -27,7 +28,12 @@ if(isset($_SESSION['UserInfo']) || !empty($_SESSION['UserInfo'])){
 
         }
     }
-    // 
+    // check userytype
+    if ($tg['UserType'] == 1) {
+        $type = 1;
+    } else {
+        $type = 0;
+    }    
 }
 $userid=$tg['UserId'];
 $kq=$CI->site_model->countclassnotteacherbyuserid($userid);
@@ -162,7 +168,7 @@ element.style {
         <div class="col-md-2 col-sm-12 padd-r-0">
             <div class="detailjob-header teacher">
                 <?php if(!empty($item->Image)){?>
-                    <img class="img-responsive" src="<?= gethumbnail(geturlimageAvatar(strtotime($item->CreateDate)).$item->Image,$item->Image,strtotime($item->CreateDate),180,180,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                    <img class="img-responsive" src="<?php gethumbnail(geturlimageAvatar(strtotime($item->CreateDate)).$item->Image,$item->Image,strtotime($item->CreateDate),180,180,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                 <?php }else{ ?>
                    <img class="img-responsive" src="images/no-image2.png" alt="<?php echo $item->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                <?php } ?>
@@ -236,7 +242,7 @@ element.style {
                         </p>
                         <div class="chiso">2. Lớp và chủ đề dạy</div>
                             <div>
-                                <span><?= $item->classname ?></span>
+                                <span><?php $item->classname ?></span>
                             </div>
                             <ul class="topicteach">
                                 <?php if(!empty($topic)){
@@ -437,7 +443,7 @@ element.style {
                 <div class="giasu_logo">
                   <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name; ?>">
                     <?php if(!empty($n->Image)){?>
-                        <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),174,174,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                        <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),174,174,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                     <?php }else{ ?>
                        <img src="images/no-image2.png" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                    <?php } ?>
@@ -481,7 +487,7 @@ element.style {
             Thông tin cá nhân
         </div>
         <div class="uvngaysinh"> 
-            Ngày sinh: <?php if(empty($item->Birth)){echo "01/01/1970";}else{echo date('d/m/Y',strtotime($item->Birth));} ?>               
+            Ngày sinh: <?php if(empty($item->Birth)){echo "Chưa cập nhật";}else{echo date('d/m/Y',strtotime($item->Birth));} ?>               
         </div>
         <div class="uvgioitinh">
        Giới tính: <?php echo GetSex(intval($item->Sex)); ?> 
@@ -740,7 +746,7 @@ element.style {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <div class="modal-title"><b>Mời dạy lớp</b></div>
+          <div class="modal-title"><b>Mời dạy lớp <?php echo $item->Userid ?></b></div>
           <input type="hidden" id="txtuserid" name="txtuserid" value="<?php echo $item->UserID ?>" />
       </div>
       <div class="modal-body">
@@ -907,6 +913,7 @@ element.style {
           }); 
         });
         $('.btnluuhosogv').on('click',function(){
+            // var type = <?php echo  isset($type) ? $type : 3 ?>;
             $.ajax(
             {
 
@@ -921,7 +928,7 @@ element.style {
                   if (reponse.kq == true) {                          
                       alert(reponse.data);
                   }else{
-                    alert('Lưu hồ sơ thành công');
+                    alert('Bạn cần đăng nhập hoặc bạn phải là phụ huynh');
                 }
 
             },

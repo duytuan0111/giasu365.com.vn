@@ -13,10 +13,10 @@
                         <input type="text" id="datepiker" name="datepiker" placeholder="Chọn khoảng thời gian" />
                         <i class="fa fa-datetime"></i> 
                     </div>-->
-                    <div class="countitem">Tổng số: <?php echo $giaovienluu->sogiaovien ?></div>
+                    <div class="countitem">Tổng số: <?php echo !empty($giaovienluu->sogiaovien ) ? $giaovienluu->sogiaovien : 0 ?></div>
                 </div>
                <div class="box-file-newest uvrecruitjob">
-                    <div class="title"><i class="fa fa-man-brown"></i> Danh sách gia sư đã mời dạy                    
+                    <div class="title"><i class="fa fa-man-brown"></i> Danh sách gia sư đã đề nghị dạy                   
                     </div>
                     <table class="uv-ungtuyen box-has-news teacherinvite">
                         <thead>

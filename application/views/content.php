@@ -57,7 +57,7 @@ if($usertype==1)
                                     <div class="company_logo">
                                         <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" title="<?php echo $n->ClassTitle; ?>">
                                             <?php if(!empty($n->Image)){?>
-                                                <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                                <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                             <?php }else{ ?>
                                                 <img src="images/no-image2.png" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                             <?php } ?>
@@ -100,7 +100,7 @@ if($usertype==1)
                           <div class="itemnews_l">
                               <a class="logouser">
                                   <?php if(!empty($n->Image)){?>
-                                     <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>"><img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' /></a> 
+                                     <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>"><img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' /></a> 
                                   <?php }else{ ?>
                                     <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>"> <img src="images/no-image2.png" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' /></a> 
                                   <?php } ?>
@@ -109,7 +109,7 @@ if($usertype==1)
                               <span><?php echo date("d/m/Y",strtotime($n->CreateDate)); ?></span>
                           </div>
                           <div class="itemnews_r">
-                              <a target="_blank" href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" class="item-uv-name" tabindex="0"><i class="fa fa-online"></i> <?php echo $n->ClassTitle ?> </a>
+                              <a  href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" class="item-uv-name" tabindex="0"><i class="fa fa-online"></i> <?php echo $n->ClassTitle ?> </a>
                               <p><?php $gn_text=$n->DescClass;
                               if ( strlen( $n->DescClass ) > 250 ) {
                                   $gn_text = substr( $n->DescClass, 0, 250 );
@@ -132,7 +132,7 @@ if($usertype==1)
                   echo "<div class='col-md-12'>Không tìm thấy bản ghi.</div>";
               } ?>
           </div>
-          <div class="home_camnang">
+         <!--  <div class="home_camnang">
               <div class="tit_hd">
                 <h3><img src="images/ic_cn.png" alt="Cẩm nang nghề nghiệp"/><span>Cẩm nang nghề nghiệp</span></h3>
                 <a href="" class="span_hd">Xem tất cả <img src="images/ic_muiten.png" alt="#"/></a>
@@ -160,7 +160,7 @@ if($usertype==1)
                   } ?>                
                 </div>
               </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-4 col-xs-12">
           <div class="box_job_search tagwork uvonline">
@@ -238,9 +238,9 @@ else if($usertype==0)
                 <div class="company_logo">
                   <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name ?>">
                     <?php if(!empty($n->Image)){?>
-                      <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                      <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                     <?php }else{ ?>
-                      <img src="<?= gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                      <img src="<?php gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                     <?php } ?>
                   </a>
                 </div>
@@ -284,7 +284,7 @@ else if($usertype==0)
                       <div class="company_logo">
                         <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name ?>">
                           <?php if(!empty($n->Image)){?>
-                            <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                            <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                           <?php }else{ ?>
                             <img src="images/no-image2.png" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                           <?php } ?>
@@ -323,7 +323,7 @@ else if($usertype==0)
                       <div class="giasu_logo">
                         <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name ?>">
                           <?php if(!empty($n->Image)){?>
-                            <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),174,174,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                            <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),174,174,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                           <?php }else{ ?>
                             <img src="images/no-image2.png" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                           <?php } ?>
@@ -551,15 +551,16 @@ else if($usertype==3)
                 <div class="company_logo">
                   <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name ?>">
                     <?php if(!empty($n->Image)){?>
-                      <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                      <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                     <?php }else{ ?>
-                      <img src="<?= gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                      <img src="<?php gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                     <?php } ?>
                   </a>
                 </div>
                 <div class="right_item">
-                  <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name ?>" class="title_new"><i class="fa fa-online"></i><?php echo $n->TitleView ?></a>
-                  <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name ?>" class="title_co"><i class="fa fa-giasuname"></i><?php echo $n->Name ?> <i class="fa fa-chat" data-toggle="tooltip" title="Chat với gia sư"></i></a>
+                   <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name ?>" class="title_new"><i class="fa fa-giasuname"></i><?php echo $n->Name ?> <i class="fa fa-chat" data-toggle="tooltip" title="Chat với gia sư"></i></a>
+                  <a class="title_co"><i class="fa fa-online"></i><?php echo $n->TitleView ?></a>
+                
                   <span class="money_item">Từ: <span><?php echo number_format($n->Free)." vnđ/h" ?></span></span>
                   <span class="time_item"><?php echo $n->CityName ?></span>
                 </div>
@@ -599,7 +600,7 @@ else if($usertype==3)
                                     <div class="company_logo">
                                         <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" title="<?php echo $n->ClassTitle; ?>">
                                             <?php if(!empty($n->Image)){?>
-                                                <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>"alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                                <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>"alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                             <?php }else{ ?>
                                                 <img src="images/no-image2.png" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                             <?php } ?>
@@ -629,7 +630,7 @@ else if($usertype==3)
   </section>
   <section class="padd-top-20 padd-bot-30">
     <div class="container">
-      <div class="home_camnang">
+   <!--    <div class="home_camnang">
         <div class="tit_hd">
           <h3><img src="images/ic_cn.png" alt="Cẩm nang nghề nghiệp"/><span>Cẩm nang nghề nghiệp</span></h3>
           <a href="" class="span_hd">Xem tất cả <img src="images/ic_muiten.png" alt="#"/></a>
@@ -657,7 +658,7 @@ else if($usertype==3)
             } ?>                
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
   <section class="padd-top-20 padd-bot-30">
@@ -675,7 +676,7 @@ else if($usertype==3)
                           <div class="itemnews_l">
                               <a class="logouser">
                                   <?php if(!empty($n->Image)){?>
-                                      <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                      <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                   <?php }else{ ?>
                                       <img src="images/no-image2.png" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                   <?php } ?>
@@ -684,7 +685,7 @@ else if($usertype==3)
                               <span><?php echo date("d/m/Y",strtotime($n->CreateDate)); ?></span>
                           </div>
                           <div class="itemnews_r">
-                              <a target="_blank" href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" class="item-uv-name" tabindex="0"><i class="fa fa-online"></i> <?php echo $n->ClassTitle ?> </a>
+                              <a  href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" class="item-uv-name" tabindex="0"><i class="fa fa-online"></i> <?php echo $n->ClassTitle ?> </a>
                               <p><?php $gn_text=$n->DescClass;
                               if ( strlen( $n->DescClass ) > 250 ) {
                                   $gn_text = substr( $n->DescClass, 0, 250 );
@@ -717,9 +718,9 @@ else if($usertype==3)
                   <div class="itemfeature">
                   <div class="feature-icon">
                     <?php if(!empty($n->Image)){?>
-                      <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,100) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                      <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,100) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                     <?php }else{ ?>
-                     <img src="<?= gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                     <img src="<?php gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                    <?php } ?>
                   </div>
                   <div class="feature-caption">
@@ -761,7 +762,7 @@ else if($usertype==3)
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var configulr='<?php echo site_url() ?>';
+    var configulr='<?php echo base_url() ?>';
     $('#monhoc').select2({ width: '100%',placeholder:"Chọn môn học" });
     $('#chudehoc').select2({ width: '100%',placeholder: "Chọn chủ đề"});
     $('#gioitinh').select2({ width: '100%',placeholder:"Chọn giới tính" });

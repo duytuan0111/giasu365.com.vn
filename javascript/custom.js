@@ -14,7 +14,6 @@ All custom js files contents are below
 // var configulr = 'https://timviec365.com.vn/gia-su/';
 
 var configulr = 'http://localhost:8181/';
-
 (function($) {
   "use strict";
   var um = new UserManager();
@@ -608,6 +607,7 @@ function UserManager() {
   //         $('#emailuser').addClass('errorClass')
   //     }
   // });
+
   $('#btnconfirmpass').on('click', function() {
     if ($('#password').val() != '') {
       $.ajax({

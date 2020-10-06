@@ -25,7 +25,7 @@
                                     <div class="company_logo">
                                         <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>" title="<?php echo $n->ClassTitle; ?>">
                                             <?php if(!empty($n->Image)){?>
-                                                <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                                <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                             <?php }else{ ?>
                                                 <img src="images/no-image2.png" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                             <?php } ?>
@@ -68,7 +68,7 @@
                                 <div class="itemnews_l">
                                     <a class="logouser">
                                         <?php if(!empty($n->Image)){?>
-                                            <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>"><img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' /></a> 
+                                            <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>"><img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,100) ?>" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' /></a> 
                                         <?php }else{ ?>
                                             <a href="<?php echo base_url().'lop-hoc/'.vn_str_filter($n->ClassTitle).'-'.$n->ClassID ?>"><img src="images/no-image2.png" alt="<?php echo $n->Name ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' /></a> 
                                         <?php } ?>
@@ -313,7 +313,7 @@
                         <ul>                                   
                            <?php if(!empty($topkey)){
                               foreach($topkey as $n){ ?>
-                                <li><a title="<?= $n->keywork ?>" href="<?= $n->link ?>"><?= $n->keywork ?></a></li>
+                                <li><a title="<?php $n->keywork ?>" href="<?php $n->link ?>"><?php $n->keywork ?></a></li>
                             <?php
                             } }
                             ?>

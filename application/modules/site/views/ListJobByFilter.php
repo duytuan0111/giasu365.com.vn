@@ -193,7 +193,7 @@ $CI->load->model('site/site_model');
                             <div class="col-md-4 col-sm-6">
     							<div class="grid-view brows-job-list">
     								<div class="brows-job-company-img">
-    									<img src="<?= gethumbnail(geturlimageAvatar($n->usc_create_time).$n->usc_logo,$n->usc_logo,$n->usc_create_time,80,80,85) ?>" alt="<?php echo $n->usc_company ?>">
+    									<img src="<?php gethumbnail(geturlimageAvatar($n->usc_create_time).$n->usc_logo,$n->usc_logo,$n->usc_create_time,80,80,85) ?>" alt="<?php echo $n->usc_company ?>">
     								</div>
     								<div class="brows-job-position">
     									<h3><a target="_blank" href="<?php echo base_url()."".vn_str_filter($n->new_title)."-job".$n->new_id.".html"; ?>"><?php echo $n->new_title ?></a> 

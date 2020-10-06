@@ -1120,6 +1120,7 @@ class site extends Controller
 
   function searchteacherheader()
   {
+    $result = [];
     $key = $_POST['key'];
     $subject=$_POST['subject'];
     $place=$_POST['place'];
@@ -1205,7 +1206,15 @@ class site extends Controller
       $link=base_url().$quanhuyen.'-c45d'.intval($district).'.html';
     }
 //===='tim-gia-su?key=(:any)&subject=(:num)&topic=(:num)&place=(:num)&district=(:num)&type=(:num)&sex=(:num)&order=(:any)(/:num)
-    
+    else if(!empty($key) && !empty(CheckCity($place)) && intval($subject)==0 && intval($class)==0 && intval($district)==0) {
+      $link=base_url()."tim-gia-su?keywork=".$key."&place=".intval($place).'.html';
+    }
+    else if(!empty($key) && empty(CheckCity($place)) && intval($subject)==0 && intval($class)==0 && intval($district)==0) {
+      $link=base_url()."tim-gia-su?keywork=".$key."&place=".intval($place).'.html';
+    }
+    else if (empty($key) && empty(CheckCity($place)) && intval($subject)==0 && intval($class)==0 && intval($district)==0) {
+      $result['blank'] = true;
+    }
     else
     { 
       
@@ -1214,7 +1223,8 @@ class site extends Controller
     }
 
     
-    $result=['kq'=>true,'data'=>$link];
+    $result['kq'] = true; 
+    $result['data'] = $link;
     echo json_encode($result,JSON_UNESCAPED_UNICODE);
    
   }
@@ -1378,6 +1388,96 @@ class site extends Controller
         // die();
         $this->load->view('template',$data);
       }
+      function searchtteacherbycity($alias,$keywork,$place,$district)
+      {
+        $subject = '';
+        $class = '';
+        $district = '';
+        $page=$start_row=$this->uri->segment(2);
+        $data['home'] = false;  
+        $data['showsearch']=true; 
+        $sql=$this->site_model->gettblwidthid('tbl_meta',1);
+        $data['meta_title']=$sql->title;
+        $data['meta_key']=$sql->metakeywork;
+        $data['meta_des']=$sql->metadesc;
+        $lop=$this->site_model->SelectClassByid(intval($class));
+        $classname=$lop->classname;
+        if(!empty($sql->name)){
+          $data['metah1']=$sql->name;
+        }else{
+          $data['metah1']='SO SÁNH LƯƠNG CỦA BẠN TRƯỚC KHI NHẢY VIỆC!';
+        } 
+        $perpage=10;
+        if(empty($page)||intval($page)==0){
+          $page=0;
+        }else{
+          $page=intval($page);
+        }
+        if($page <= 10){
+          $data['robots']= 'noindex,nofollow';
+        }else{
+         $data['robots']= 'noindex,nofollow'; 
+       }
+       $keywork = str_replace("+", " ",  urldecode($keywork));
+       $order = 'last';
+
+       $data['keyfilter']=['keywork'=>$keywork,'subject'=>$subject, 'class'=>$class,'place'=>$place,'district' => $district];
+       
+       $result=$this->site_model->ListTeacherBySearchHeader($keywork,$subject,$class,$place,$district,$order,$page,$perpage);
+
+      $data['keywork']=$keywork;
+    
+      $data['topkey'] = $this->site_model->ListTopKeywork();
+
+     
+      // echo "<script type='text/javascript'>alert('$keywork');</script>";
+      // die();
+       $link=base_url()."tim-gia-su?keywork=".$keywork."&subject=".intval($subject)."&class=".intval($class)."&place=".intval($place)."&district=".intval($district).'.html';
+      //  var_dump( $link);
+      //  die();
+      
+       $data['lstitem']=$result['data'];
+       
+       $this->load->library('pagination');
+       $config['total_rows'] = $result['total'];
+      
+       $config['per_page'] = $perpage;
+      
+       $config['uri_segment'] =2;
+       $config['next_link'] = '<i class="fa fa-angle-right"></i>';
+       $config['prev_link'] = '<i class="fa fa-angle-left"></i>';
+       $config['num_links'] = 4;
+       $config['first_link'] = '<i class="fa fa-angle-double-left"></i>';
+       $config['last_link'] = '<i class="fa fa-angle-double-right"></i>';
+       $config['base_url']=$link;
+      
+       $this->pagination->initialize($config);  
+       $data['total']=$result['total'];
+       
+       $data['order']=$order;
+      
+       $data['start_row']= $page;
+       $data['pagination']= $this->pagination->create_links();
+       
+       $data['monhoc']=$this->site_model->ListSubject(); 
+       $data['chude']=$this->site_model->GetTeacherFeature();
+      
+       $data['districk']=$this->site_model->CountTeacherbyCity();
+       $data['lstonline']=$this->site_model->GetTeacherOnline(10);
+       $data['selectbox']=base_url()."giao-vien&key=".$keywork."&subject=".intval($subject)."&topic=".intval($topic)."&place=".intval($place)."&type=".intval($type)."&sex=".intval($sex)."&order=".intval($order);
+
+       $data['canonical']=base_url()."giao-vien"; 
+
+       $data['robots']= 'noindex,nofollow'; 
+       $data['content']='searchtutorresultteacher';
+       $data['classheader']='navbar navbar-default white bootsnav on no-full';  
+        $data['cssbody']='' ;//customsl
+        $data['showsupport']=true;
+        
+        // var_dump($result['data']);
+        // die();
+        $this->load->view('template',$data);
+      }
       function getName(){
 
        $sql="SELECT * FROM class ";
@@ -1455,6 +1555,7 @@ if($db_qr->num_rows() > 0)
 
     function searchclassheader()
     {
+      $result = [];
       $key = $_POST['key'];  
       $subject=$_POST['subject'];
       $place=$_POST['place'];
@@ -1548,12 +1649,22 @@ if($db_qr->num_rows() > 0)
     {
       $link=base_url().'viec-lam-gia-su-'.$quanhuyen.'-p45d'.intval($district).'.html';
     }
+    else if(!empty($key) && !empty(CheckCity($place)) && intval($subject)==0 && intval($class)==0 && intval($district)==0) {
+      $link=base_url()."tim-viec-lam-gia-su?keywork=".$key."&place=".intval($place).'.html';
+    }
+    else if(!empty($key) && empty(CheckCity($place)) && intval($subject)==0 && intval($class)==0 && intval($district)==0) {
+      $link=base_url()."tim-viec-lam-gia-su?keywork=".$key."&place=".intval($place).'.html';
+    }
+    else if(empty($key) && empty(CheckCity($place)) && intval($subject)==0 && intval($class)==0 && intval($district)==0) {
+      $result['blank'] = true;
+    }
     else
     {
       $link=base_url()."tim-viec-lam-gia-su?keywork=".$key."&subject=".intval($subject)."&class=".intval($class)."&place=".intval($place)."&district=".intval($district)."&type=".intval($type)."&sex=".intval($sex).'.html'; 
     }
 
-   $result=['kq'=>true,'data'=>$link];
+   $result['kq'] = true; 
+   $result['data'] = $link;
    echo json_encode($result,JSON_UNESCAPED_UNICODE);
  }
  function CheckMonHoc()
@@ -1643,6 +1754,50 @@ function tutorresultfind($keywork,$subject,$topic,$place,$type,$sex)
 }
 function searchtutorresultfind($alias,$keywork,$subject,$class,$place,$district,$type,$sex)
 {
+  $classid    = $this->site_model->SelectClassByid($class)->id;
+  $data['home'] = false;  
+  $data['showsearch']=true; 
+  $sql=$this->site_model->gettblwidthid('tbl_meta',1);
+  $data['meta_title']=$sql->title;
+  $data['meta_key']=$sql->metakeywork;
+  $data['meta_des']=$sql->metadesc;
+  if(!empty($sql->name)){
+    $data['metah1']=$sql->name;
+  }else{
+    $data['metah1']='SO SÁNH LƯƠNG CỦA BẠN TRƯỚC KHI NHẢY VIỆC!';
+  } 
+  $keywork = str_replace("+", " ",  urldecode($keywork));
+  if(empty($keywork)){
+    $keywork = '';
+  }
+  else
+  {
+    $keywork = $keywork;
+  }
+
+  $data['keyfilter']=['keywork'=>$keywork,'subject'=>$subject, 'class'=>$class,'topic'=>$topic,'place'=>$place,'district' => $district,'type'=>$type,'sex'=>$sex];
+  $data['lstitem']=$this->site_model->ListClassBySearchHeader($keywork,$subject,$classid,$place,$district,$order,0,20);
+
+  $data['topkey'] = $this->site_model->ListTopKeywork();
+  $data['monhoc']=$this->site_model->ListSubject(); 
+  $data['districk']=$this->site_model->GetListdistrictbycity();
+  $data['lstonline']=$this->site_model->GetListClassbyUserOnline();
+  $data['canonical']=base_url()."viec-lam-gia-su"; 
+  $data['robots']= 'noindex,nofollow';  
+  $data['content']='searchtutorresultfind';
+  $data['classheader']='navbar navbar-default white bootsnav on no-full'; 
+  $data['cssbody']='customsl' ;
+  
+  $this->load->view('template',$data);
+
+}
+function searchtutorresultbycity($alias,$keywork,$place)
+{
+  $subject  = '';
+  $class    = '';
+  $district = '';
+  $type     = '';
+  $sex      = '';
   $classid    = $this->site_model->SelectClassByid($class)->id;
   $data['home'] = false;  
   $data['showsearch']=true; 
@@ -3884,6 +4039,18 @@ function loginteacher()
               }
             }
             echo json_encode($result,JSON_UNESCAPED_UNICODE);        
+          }
+          function ajaxdeleteteacherclass(){
+            $result   = ['kq' => false, 'data' => ''];
+            $ClassID  = $this->input->post('ClassID');
+            if (!empty($ClassID)) {
+              $del = $this->site_model->deleteteacherclass($ClassID);
+              if ($del['kq'] == true) {
+                $result['kq'] = true;
+                $result['data'] = 'Xóa tin đăng tìm gia sư thành công';
+              }
+            }
+            echo json_encode($result, JSON_UNESCAPED_UNICODE);
           }
           function ajaxaddclassvsusers()
           {

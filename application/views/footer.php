@@ -197,7 +197,12 @@ $urlweb= current_url();
 							// },
 							success: function (reponse) {
 								if (reponse.kq == 1) {
-									window.location.href = reponse.data;
+									if (reponse.blank  == true) {
+										alert('Vui lòng chọn trường tìm kiếm');
+									}
+									else {
+										window.location.href = reponse.data;
+									}
 								}              
 							},
 							error: function (xhr) {
@@ -240,9 +245,14 @@ $urlweb= current_url();
 							},
 							success: function (reponse) {
 								if (reponse.kq == true) {
-									window.location.href = reponse.data;
+									if (reponse.blank == true) {
+										window.alert('Vui lòng chọn trường tìm kiếm');
+									} else {
+										window.location.href = reponse.data;
+									}
 
-								}                      
+								}
+
 							},
 							error: function (xhr) {
 								console.log(xhr);
@@ -348,5 +358,6 @@ $urlweb= current_url();
 				});
 
 			});
+		
 		
 	</script>

@@ -13,6 +13,43 @@ All custom js files contents are below
 var configulr = 'http://localhost:8181/';
 (function($){
 "use strict";
+// issearch chahnge
+$('.uvactiventd input[name="uvduyetsearch"]').each(function () {
+    $(this).change(function () {
+        /*if($(this).prop('checked')==true){
+            alert('đã bật search');
+        }*/
+        var cknhatuyendung=1;
+        if(typeof ($('.uvactiventd input[name="uvduyetsearch"]:checked').val())=== "undefined"){
+            cknhatuyendung=0;
+        };
+        $.ajax(
+              {                  
+                  url: configulr+"site/ajaxupdateissearch",
+                  type: "POST",
+                  data: { issearch:cknhatuyendung},
+                  dataType: 'json',
+                  beforeSend: function () {
+                      $("#boxLoading").show();
+                  },
+                  success: function (reponse) {
+                      if (reponse.kq == true) {
+                          alert(reponse.data);
+                      }else{
+                        alert('Thay đổi trạng thái thất bại');
+                      }
+                      
+                  },
+                  error: function (xhr) {
+                      alert("error");
+                  },
+                  complete: function () {
+                      $("#boxLoading").hide();window.location.reload();
+                  }
+              }); 
+        /*alert($('.uvactiventd input[name="uvduyetsearch"]:checked').val());*/
+    });
+    });
 var um=new UserManager();
 	//Loader
 	$(".Loader").fakeLoader({

@@ -2647,7 +2647,7 @@ function GetTopClassByMoney($number)
     SUM(CASE WHEN uc.Active = 1 THEN 1 ELSE 0 END) AS dongyday
     from uservsclass as uc
     GROUP BY ClassID) t1 on t1.ClassID=t.ClassID";
-    $query.=" where t.ClassTitle <>'' and t.`Active`=1 order by t.Money desc limit 0,".$number;
+    $query.=" where t.ClassTitle <>'' and t.`Active`=1 and u.IsSearch=1 order by t.Money desc limit 0,".$number;
     $db_qr = $this->db->query($query); 
     $tg1="";
     if($db_qr->num_rows() > 0)
@@ -2661,7 +2661,7 @@ function GetTopClassByMoney($number)
 }
 function GetClassTop($number)
 {
-    $query="select t.*,u.`Name`,u.Phone as sodienthoaidk
+    $query="SELECT t.*,u.`Name`,u.Phone as sodienthoaidk
     ,u.Email
     ,u.CityID
     ,u.CityName,u.`Image`
@@ -2673,7 +2673,7 @@ function GetClassTop($number)
     SUM(CASE WHEN uc.Active = 1 THEN 1 ELSE 0 END) AS dongyday
     from uservsclass as uc
     GROUP BY ClassID) t1 on t1.ClassID=t.ClassID";
-    $query.=" where t.ClassTitle <>'' and 1=1 and t.`Active`=1 order by t.ClassID desc limit 0,".$number;
+    $query.=" where t.ClassTitle <>'' and 1=1 and t.`Active`=1 and u.IsSearch=1 order by t.ClassID desc limit 0,".$number;
     $db_qr = $this->db->query($query); 
     $tg1="";
     if($db_qr->num_rows() > 0)
@@ -3845,6 +3845,16 @@ function deleteusersaveuser($userid,$usersaveid){
     }
     return $result;
 }
+function deleteteacherclass($ClassID){
+    $result=['kq'=>false,'data'=>''];
+    $query1="DELETE FROM teacherclass where ClassID = '".$ClassID."'";
+    $db_qr = $this->db->query($query1);
+    if($db_qr)
+    {
+        $result=['kq'=>true,'data'=>''];                          
+    }
+    return $result;
+}
 function updateclassvsusers($userid,$classid,$active,$note){
         //0 mời dạy,1 đồng ý,2 không đồng ý
     $result=['kq'=>false,'data'=>''];
@@ -4179,7 +4189,7 @@ function SendmailHunghapay($partner,$pass,$toAddress,$subject,$body,$int_type)
        SUM(CASE WHEN uc.Active = 1 THEN 1 ELSE 0 END) AS dongyday
        from uservsclass as uc
        GROUP BY ClassID) t1 on t1.ClassID=t.ClassID";
-       $query.=" where t.ClassTitle <> '' and t.`Active`=1 and u.UserType = 0";
+       $query.=" where t.ClassTitle <> '' and u.IsSearch=1 and t.`Active`=1 and u.UserType = 0";
        if(!empty($keywork) && strtolower($keywork)!='all'){
         $query.=" and t.ClassTitle like '%".str_replace(' ','%',$keywork)."%'";
     }
@@ -4228,7 +4238,7 @@ function ListClassBySearchHeader($keywork,$subject,$class,$place,$district,$orde
        SUM(CASE WHEN uc.Active = 1 THEN 1 ELSE 0 END) AS dongyday
        from uservsclass as uc
        GROUP BY ClassID) t1 on t1.ClassID=t.ClassID";
-       $query.=" where t.ClassTitle <> '' and t.`Active`=1 and u.UserType = 0";
+       $query.=" where t.ClassTitle <> '' and u.IsSearch=1 and t.`Active`=1 and u.UserType = 0";
        if(!empty($keywork) && strtolower($keywork)!='all'){
         $query.=" and t.ClassTitle like '%".str_replace(' ','%',$keywork)."%'";
 
@@ -4466,7 +4476,7 @@ function ListTeacherBySearchHeader($keywork,$subject,$class,$place,$district,$or
     where u.Email <>'' and u.Active=1 and u.UserType=1";
      
     if(!empty($keywork) && strtolower($keywork)!='all'){
-        $query.=" and (ut.TitleView like '%".str_replace(' ','%',$keywork)."%')";
+        $query.=" and (u.Name like '%".str_replace(' ','%',$keywork)."%')";
     }
     if(!empty($class)){
         $query.=" and (ut.TitleView like '%".str_replace(' ','%',$class)."%') or ut.IdTitle like '%".$class."%'";

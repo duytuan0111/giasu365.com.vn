@@ -37,7 +37,7 @@ $detect = new Mobile_Detect;
         </button>
         <!-- Start Header Navigation -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="http://timviec365.com.vn/">
+            <a class="navbar-brand" href="<?php echo base_url(); ?>">
                 <?php if(!$home){ ?>
                     <img src="images/logo-01.png" class="logo logo-display" alt="tìm việc">
                 <?php }else{ ?>
@@ -61,7 +61,7 @@ $detect = new Mobile_Detect;
                         <li><a href="<?php echo base_url() ?>tim-lop-hoc" title="">Danh sách lớp học</a></li>
                     </ul>
                 </li>
-                <li class="dropdown p1">
+               <!--  <li class="dropdown p1">
                     <a class="dropdown-toggle v5" data-toggle="dropdown" title="">Góc chia sẻ</a>
                     <ul class="dropdown-menu " role="menu">
                         <?php $news = $this->db->query('SELECT c.`name`,c.alias as aliascat,c.id as idcat FROM chuyenmuc as c WHERE c.status=1 ORDER BY c.id'); 
@@ -73,7 +73,7 @@ $detect = new Mobile_Detect;
                             <?php }
                         } ?>
                     </ul>
-                </li>
+                </li> -->
             </ul>
             <ul class="navbar-right loginmenu" >
                 <?php  if(!isset($_SESSION['UserInfo']) || empty($_SESSION['UserInfo'])){ ?>
@@ -140,7 +140,7 @@ $detect = new Mobile_Detect;
                 <div class="tab-pane fade in active" id="pane-tab-1" role="tabpanel" aria-labelledby="tab1">
                     <div class="banner-text">
                 <form onsubmit="return false" class="form-horizontal" style="padding-top: 0px">
-                    <div class="col-md-4 no-padd">
+                    <div class="col-md-6 no-padd">
                         <div class="col-md-12 no-padd findkeyjob">
                             <div class="input-group">
                                 <input type="text" value="<?php echo ($keyfilter['keywork']!='0')?$keyfilter['keywork']:'' ?>" id="findkeyjob" class="form-control right-bor" placeholder="Tìm kiếm gia sư"> 
@@ -170,9 +170,9 @@ $detect = new Mobile_Detect;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 no-padd">
-                        <div class="col-md-6 no-padd">
-                            <div class="col-md-6 no-padd nganhnghe">
+                    <div class="col-md-6 no-padd">
+                        <!-- <div class="col-md-6 no-padd"> -->
+                            <!-- <div class="col-md-6 no-padd nganhnghe">
                                 <div class="input-group">
                                     
                                     <span class="span-before"><i class="nn"></i></span>
@@ -195,8 +195,8 @@ $detect = new Mobile_Detect;
 
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-6 no-padd lop">
+                            </div> -->
+                            <!-- <div class="col-md-6 no-padd lop">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn"></i></span>
                                     <select id="index_lop" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -215,10 +215,10 @@ $detect = new Mobile_Detect;
                                         ?>       
                                     </select>
                                 </div>
-                            </div>   
-                        </div>
-                        <div class="col-md-5 no-padd">
-                            <div class="col-md-6 no-padd diadiem">
+                            </div>  -->  
+                        <!-- </div> -->
+                        <div class="col-md-10 no-padd">
+                            <div class="col-md-12 no-padd diadiem">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
                                     <select id="index_dia_diem" class="form-control" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -238,7 +238,7 @@ $detect = new Mobile_Detect;
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 no-padd quanhuyen">
+                            <!-- <div class="col-md-6 no-padd quanhuyen">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
                                     <select id="index_quanhuyen" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -257,9 +257,9 @@ $detect = new Mobile_Detect;
                                         ?>  
                                     </select>
                                 </div>
-                            </div>  
+                            </div> -->  
                         </div>                               
-                        <div class="col-md-1 no-padd btnsearch">
+                        <div class="col-md-2 no-padd btnsearch">
                             <div class="input-group">
                                 <button class="btn btn-primary timvieclam" aria-label="more" role="button"><i class="fa fa-search"></i></button>
                             </div>
@@ -271,10 +271,12 @@ $detect = new Mobile_Detect;
                 <div class="tab-pane fade" id="pane-tab-2" role="tabpanel" aria-labelledby="tab2">
                     <div class="banner-text">
                 <form onsubmit="return false" class="form-horizontal" style="padding-top: 0px">
-                    <div class="col-md-4 no-padd">
+                    <div class="col-md-6 no-padd">
                         <div class="col-md-12 no-padd findkeyjob">
                             <div class="input-group">
                                 <input type="text" value="<?php echo ($keyfilter['keywork']!='0')?$keyfilter['keywork']:'' ?>" id="findkeyjob1" class="form-control right-bor" placeholder="Tìm kiếm lớp gia sư" aria-label="nhập từ khóa">
+                                <div class="input-group">
+                            </div>
                             </div>
                         </div>
                         <div class="no-padd user_type hidden-mobile">
@@ -300,9 +302,9 @@ $detect = new Mobile_Detect;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 no-padd">
-                        <div class="col-md-6 no-padd">
-                            <div class="col-md-6 no-padd nganhnghe">
+                    <div class="col-md-6 no-padd">
+                        <!-- <div class="col-md-6 no-padd"> -->
+                            <!-- <div class="col-md-6 no-padd nganhnghe">
                                 <div class="input-group">
                                     
                                     <span class="span-before"><i class="nn"></i></span>
@@ -325,8 +327,8 @@ $detect = new Mobile_Detect;
 
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-6 no-padd lop">
+                            </div> -->
+                            <!-- <div class="col-md-6 no-padd lop">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn"></i></span>
                                     <select id="index_lop1" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -345,10 +347,10 @@ $detect = new Mobile_Detect;
                                         ?>       
                                     </select>
                                 </div>
-                            </div>   
-                        </div>
-                        <div class="col-md-5 no-padd">
-                            <div class="col-md-6 no-padd diadiem">
+                            </div> -->   
+                        <!-- </div> -->
+                        <div class="col-md-10 no-padd">
+                            <div class="col-md-12 no-padd diadiem">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
                                     <select id="index_dia_diem1" class="form-control" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -368,7 +370,7 @@ $detect = new Mobile_Detect;
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 no-padd quanhuyen">
+                           <!--  <div class="col-md-6 no-padd quanhuyen">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
                                     <select id="index_quanhuyen1" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -387,9 +389,9 @@ $detect = new Mobile_Detect;
                                         ?>  
                                     </select>
                                 </div>
-                            </div>  
+                            </div>  --> 
                         </div>                               
-                        <div class="col-md-1 no-padd btnsearch">
+                        <div class="col-md-2 no-padd btnsearch">
                             <div class="input-group">
                                 <button class="btn btn-primary timvieclam" aria-label="more" role="button"><i class="fa fa-search"></i></button>
                             </div>
@@ -584,7 +586,7 @@ $detect = new Mobile_Detect;
                     </div>
                     <div class="no-padd">
                         <div class="col-xs-12 no-padd">
-                            <div class="col-xs-12 no-padd nganhnghe">
+                           <!--  <div class="col-xs-12 no-padd nganhnghe">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn"></i></span>
                                     <select id="index_nganhnghe" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?> >
@@ -604,8 +606,8 @@ $detect = new Mobile_Detect;
 
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 no-padd lop">
+                            </div> -->
+                           <!--  <div class="col-xs-12 no-padd lop">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn"></i></span>
                                     <select id="index_lop" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -624,7 +626,7 @@ $detect = new Mobile_Detect;
                                         ?>       
                                     </select>
                                 </div>
-                            </div>   
+                            </div>  -->  
                         </div>
                         <div class="col-xs-12 no-padd">
                             <div class="col-xs-12 no-padd diadiem">
@@ -647,7 +649,7 @@ $detect = new Mobile_Detect;
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xs-12 no-padd quanhuyen">
+                           <!--  <div class="col-xs-12 no-padd quanhuyen">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
                                     <select id="index_quanhuyen" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -666,7 +668,7 @@ $detect = new Mobile_Detect;
                                         ?>  
                                     </select>
                                 </div>
-                            </div>  
+                            </div>  --> 
                         </div>                               
                         <div class="col-xs-12 no-padd btnsearch">
                             <div class="input-group">
@@ -711,7 +713,7 @@ $detect = new Mobile_Detect;
                     </div>
                     <div class="no-padd">
                         <div class="col-xs-12 no-padd">
-                            <div class="col-xs-12 no-padd nganhnghe">
+                           <!--  <div class="col-xs-12 no-padd nganhnghe">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn"></i></span>
                                     <select id="index_nganhnghe1" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?> >
@@ -731,8 +733,8 @@ $detect = new Mobile_Detect;
 
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 no-padd lop">
+                            </div> -->
+                           <!--  <div class="col-xs-12 no-padd lop">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn"></i></span>
                                     <select id="index_lop1" class="form-control right-bor" <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -751,7 +753,7 @@ $detect = new Mobile_Detect;
                                         ?>       
                                     </select>
                                 </div>
-                            </div>   
+                            </div> -->   
                         </div>
                         <div class="col-xs-12 no-padd">
                             <div class="col-xs-12 no-padd diadiem">
@@ -774,7 +776,7 @@ $detect = new Mobile_Detect;
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xs-12 no-padd quanhuyen">
+                            <!-- <div class="col-xs-12 no-padd quanhuyen">
                                 <div class="input-group">
                                     <span class="span-before"><i class="nn2"></i></span>
                                     <select id="index_quanhuyen1" class="form-control"  <? if($type == 1){echo 'onchange="searchclassbyheader(); searchclassbyheader()"';} else { echo 'onchange="searchteacherbyheader(); searchbyteachertitle()"'; }?>>
@@ -793,7 +795,7 @@ $detect = new Mobile_Detect;
                                         ?>  
                                     </select>
                                 </div>
-                            </div>  
+                            </div>  --> 
                         </div>                               
                         <div class="col-xs-12 no-padd btnsearch">
                             <div class="input-group">

@@ -88,13 +88,13 @@ foreach ($laytieude as $key => $value) {
 
 
 									<div class="muc_luc" id="ml_blog">
-										<?=  makeML($item->content, '', '', $res); ?>
+										<?php  makeML($item->content, '', '', $res); ?>
 									</div>
 
 									
 									<div class="full blog-content">
 										<div class="blog-text">
-											<?=  makeXemthem(makeML_content($gt, '', ''), $arr_span); ?>
+											<?php  makeXemthem(makeML_content($gt, '', ''), $arr_span); ?>
 											<div class="post-meta">Danh mục: <span class="category"><a href="<?php echo base_url().$cat->alias.'.html' ?>"><?php echo $cat->name ?></a></span></div>
 										</div>
 										<!--<div class="row no-mrg">
@@ -119,10 +119,10 @@ foreach ($laytieude as $key => $value) {
               ?>
               <div class="col-sm-12" id="hot_news">
                 <div class="img_hot_new">
-                  <a href="<?= $n->alias . '-b' . $n->id . '.html' ?>"><img class="lazyload" src="/images/load.gif" data-src="<?= base_url() . 'upload/news/thumb/' . $n->image ?>"></a>
+                  <a href="<?php $n->alias . '-b' . $n->id . '.html' ?>"><img class="lazyload" src="/images/load.gif" data-src="<?php base_url() . 'upload/news/thumb/' . $n->image ?>"></a>
                 </div>
                 <div class="text_hot_new">
-                  <div class="tt-new-slide"> <a href="<?= $n->alias . '-b' . $n->id . '.html' ?>"><?= $n->title ?></a></div>
+                  <div class="tt-new-slide"> <a href="<?php $n->alias . '-b' . $n->id . '.html' ?>"><?php $n->title ?></a></div>
                   <div class="date-news"><i class="fa">&#xf0ce;</i><?php $d = explode('-', explode(' ', $n->created_day)[0]);
                   echo $d[2] . '-' . $d[1] . '-' . $d[0]; ?>
               </div>

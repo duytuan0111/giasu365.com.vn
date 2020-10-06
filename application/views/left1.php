@@ -106,7 +106,7 @@ foreach ($point as $key ) {
                   
                     </div>
                   </div> -->
-                  <span style="text-align: center; display: block;" class="ntdmoney">TKC: <?php echo $balance; ?> vnđ <span> và <?= $diem ?> điểm</span></span>
+                  <span style="text-align: center; display: block;" class="ntdmoney">TKC: <?php echo $balance; ?> vnđ <span> và <?php $diem ?> điểm</span></span>
                 <!-- <label class="activesearch">
                     Cho phép gia sư tìm kiếm
                     <input value="1" <?php if($footer!=''){ if($footer->IsSearch ==1){echo "checked";} } ?> name="buttonRounded" type="checkbox" id="buttonRounded">

@@ -65,13 +65,13 @@ $list_city = array(
 );
 function select_field($name,$array_value,$checked_value,$check=1){
 ?>
-	<select name="<?=$name?>" id="<?=$name?>" onchange="loadState()">
+	<select name="<?php $name ?>" id="<?php $name ?>" onchange="loadState()">
 			<?
 			if($check !=1 ){
 			?>
 				<?
 				foreach($array_value as $key => $value){
-						?><option value="<?=$key?>" <? if(getValue($name,"int","POST")==$key) echo "selected";?>><?=$value?></option><?
+						?><option value="<?php$key?>" <? if(getValue($name,"int","POST")==$key) echo "selected";?>><?php$value?></option><?
 				}
 				?>
 			<?
@@ -79,7 +79,7 @@ function select_field($name,$array_value,$checked_value,$check=1){
 			?>
 				<?
 				foreach($array_value as $key => $value){
-				?><option value="<?=$key?>" <? if($checked_value == $key) echo "selected";?>><?=$value?></option><?
+				?><option value="<?php$key?>" <? if($checked_value == $key) echo "selected";?>><?php$value?></option><?
 				}
 				?>
 			<?
@@ -90,14 +90,14 @@ function select_field($name,$array_value,$checked_value,$check=1){
 }
 function show_select_field($name,$array_value,$checked_value,$check=1){
 ?>
-	<select name="<?=$name?>" id="<?=$name?>" >
+	<select name="<?php$name?>" id="<?php$name?>" >
             <option value="">Tỉnh/TP</option>
 			<?
 			if($check !=1 ){
 			?>
 				<?
 				foreach($array_value as $key => $value){
-						?><option value="<?=$key?>" <? if(getValue($name,"int","POST")==$key) echo "selected";?>><?=$value?></option><?
+						?><option value="<?php$key?>" <? if(getValue($name,"int","POST")==$key) echo "selected";?>><?php$value?></option><?
 				}
 				?>
 			<?
@@ -105,7 +105,7 @@ function show_select_field($name,$array_value,$checked_value,$check=1){
 			?>
 				<?
 				foreach($array_value as $key => $value){
-				?><option value="<?=$key?>" <? if($checked_value == $key) echo "selected";?>><?=$value?></option><?
+				?><option value="<?php$key?>" <? if($checked_value == $key) echo "selected";?>><?php$value?></option><?
 				}
 				?>
 			<?

@@ -182,9 +182,9 @@
                                             <div class="itemnews_l">
                                                 <a href="<?php echo base_url()."ung-vien/".vn_str_filter($n->Name)."-uv".$n->UserID.".html"; ?>" class="logouser">
                                                 <?php if(!empty($n->Image)){?>
-                                            <img alt="<?php echo $n->new_title ?>" src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                            <img alt="<?php echo $n->new_title ?>" src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),63,63,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                         <?php }else{ ?>
-                                         <img src="<?= gethumbnail("images/no-image2.png","no-image2.png",strtotime($n->usc_create_time),63,40,80) ?>" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                         <img src="<?php gethumbnail("images/no-image2.png","no-image2.png",strtotime($n->usc_create_time),63,40,80) ?>" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                          <?php } ?>
                                                 </a>                                                
                                                 <span><?php if(!empty($n->Birth)){echo date("d/m/Y",strtotime($n->Birth));} ?></span>
@@ -263,9 +263,9 @@
                                        <div class="company_logo">
                                           <a href="<?php echo base_url()."".vn_str_filter($n->new_title)."-job".$n->new_id.".html"; ?>" title="<?php echo $n->new_title ?>">
                                             <?php if(!empty($n->Image)){?>
-                                                <img alt="<?php echo $n->new_title ?>" src="<?= gethumbnail(geturlimageAvatar(strtotime($n->usc_create_time)).$n->usc_logo,$n->usc_logo,strtotime($n->usc_create_time),268,150,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                                <img alt="<?php echo $n->new_title ?>" src="<?php gethumbnail(geturlimageAvatar(strtotime($n->usc_create_time)).$n->usc_logo,$n->usc_logo,strtotime($n->usc_create_time),268,150,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                             <?php }else{ ?>
-                                             <img src="<?= gethumbnail("images/no-image2.png","no-image2.png",strtotime($n->usc_create_time),268,171,80) ?>" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                             <img src="<?php gethumbnail("images/no-image2.png","no-image2.png",strtotime($n->usc_create_time),268,171,80) ?>" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                              <?php } ?>
                                           </a>
                                        </div>
@@ -300,9 +300,9 @@
                                    <div class="company_logo">
                                       <a href="<?php echo base_url()."ung-vien/".vn_str_filter($n->Name).'-uv'.$n->UserID.".html" ?>" title="<?php echo $n->Name ?>">
                                         <?php if(!empty($n->Image)){?>
-                                            <img alt="<?php echo $n->new_title ?>" src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),268,150,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                            <img alt="<?php echo $n->new_title ?>" src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),268,150,80) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                         <?php }else{ ?>
-                                         <img src="<?= gethumbnail("images/no-image2.png","no-image2.png",strtotime($n->usc_create_time),268,171,80) ?>" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                                         <img src="<?php gethumbnail("images/no-image2.png","no-image2.png",strtotime($n->usc_create_time),268,171,80) ?>" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                                          <?php } ?>
                                       </a>
                                    </div>

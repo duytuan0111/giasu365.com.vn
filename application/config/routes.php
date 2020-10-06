@@ -62,6 +62,8 @@ $route['(:any)/(:any)-s(:num)r(:num)c(:num).html(/num)?']="site/listteacherbyfil
 $route['(:any)/(:any)-c(:num)d(:num).html(/:num)?']="site/listteacherbyfilter_TPHCM/$1/$2/$3/$4";
 
 $route['tim-gia-su(:any)keywork=(:any)&subject=(:num)&class=(:num)&place=(:num)&district=(:num).html(/:num)?']="site/searchtutorresultteacher/$1/$2/$3/$4/$5/$6/";
+// tìm gia sư theo keyword và city
+$route['tim-gia-su(:any)keywork=(:any)&place=(:num).html(/:num)?']="site/searchtteacherbycity/$1/$2/$3/";
 //link tìm lớp gia sư
 
 $route['viec-lam-gia-su-(:any)-s(:num)c(:num)p(:num).html(/:num)?']="site/listclassbyfilter/$1/$2/$3/$4";
@@ -69,6 +71,8 @@ $route['viec-lam-gia-su-(:any)/(:any)-m(:num)c(:num)p(:num).html(/num)?']="site/
 $route['viec-lam-gia-su-(:any)/(:any)-p(:num)d(:num).html(/:num)?']="site/listclassbyfilter_TPHCM/$1/$2/$3/$4";
 
 $route['tim-viec-lam-gia-su(:any)keywork=(:any)&subject=(:num)&class=(:num)&place=(:num)&district=(:num)&type=(:num)&sex=(:num).html(/:num)?']="site/searchtutorresultfind/$1/$2/$3/$4/$5/$6/$7/$8";
+// tìm việc làm gia sư theo keyword và city
+$route['tim-viec-lam-gia-su(:any)keywork=(:any)&place=(:num).html(/:num)?']="site/searchtutorresultbycity/$1/$2/$3/";
 
 
 //=================

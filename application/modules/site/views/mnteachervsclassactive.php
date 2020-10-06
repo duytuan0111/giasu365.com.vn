@@ -7,7 +7,7 @@
         </div>
         <div class="manager-col-right col-md-9 col-sm-12">
             <div class="content-right " style="min-height:300px;">
-                <div class="clr" style="height:10px;position: relative;"><a class="btnlogout"><i class="fa fa-logout"></i> Thoát</a></div>
+                <div class="clr" style="height:10px;position: relative;"><a class="btnlogout" id="btnlogout"><i class="fa fa-logout"></i> Thoát</a></div>
                 <div class="clr" style="height:50px;"></div>
                 <div class="ntdlist">
                     

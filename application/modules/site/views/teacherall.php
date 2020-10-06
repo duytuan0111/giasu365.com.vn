@@ -31,7 +31,7 @@
               <div class="giasu_logo">
                 <a href="<?php echo base_url().vn_str_filter($n->Name).'-gv'.$n->UserID ?>" title="<?php echo $n->Name;?>" target="_blank">
                   <?php if(!empty($n->Image)){?>
-                    <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),174,174,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+                    <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),174,174,100) ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                   <?php }else{ ?>
                    <img src="images/no-image2.png" alt="#" onerror='this.onerror=null;this.src="images/no-image2.png";' />
                  <?php } ?>
@@ -87,9 +87,9 @@
           <div class="itemfeature">
           <div class="feature-icon">
             <?php if(!empty($n->Image)){?>
-              <img src="<?= gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,100) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+              <img src="<?php gethumbnail(geturlimageAvatar(strtotime($n->CreateDate)).$n->Image,$n->Image,strtotime($n->CreateDate),60,60,100) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
             <?php }else{ ?>
-             <img src="<?= gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
+             <img src="<?php gethumbnail('images/no-image2.png','no-image2.png',strtotime($n->CreateDate),60,60,80) ?>" alt="<?php echo $n->Name; ?>" onerror='this.onerror=null;this.src="images/no-image2.png";' />
            <?php } ?>
           </div>
           <div class="feature-caption">
@@ -210,7 +210,7 @@
       <?php if(!empty($topkey)){
         foreach($topkey as $n){ ?>
 
-          <li><a title="<?= $n->keywork ?>" href="<?= $n->link ?>"><?= $n->keywork ?></a></li>
+          <li><a title="<?php $n->keywork ?>" href="<?php $n->link ?>"><?php $n->keywork ?></a></li>
       <?php
       } }
       ?>

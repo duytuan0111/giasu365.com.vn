@@ -1,7 +1,6 @@
 ﻿//*** Ready Function
 var configulr='http://localhost/timviec3';
 jQuery(document).ready(function($) {
-
 	   'use strict';
      
     //*** Function Counter
